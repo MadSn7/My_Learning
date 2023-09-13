@@ -1,1 +1,0 @@
-this is saple text from 2 folder
