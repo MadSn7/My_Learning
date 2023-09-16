@@ -93,10 +93,46 @@ Now in JP1 functions
 >create replica for each block
 >now decide and save metadata of infor how to save those blocks.RackAwareness Policy.
 Also metadata isn't stored in HDFS it's stored in local os FS in master machine.
->and reply back with response
+>and reply back with response which contains the block size and which block to save in which node.
+>Now client api will create block create replica and client api will do process of pipeline which will distribute the data accordingly to all respective nodes. Acknowledgment is given by nodes to pipeline and pipeline to client api to master of confirmation.
+>Another issue meta data is created but coudn't write a block to that node,cleint api will repond to master informing this and master will now reply to write in another node.
+>Failure happens only when all nodes are down, or client api goes down.
+>Pipeline is for write only.
+
+>Every 3 seconds every node send a hearbeat to master confirming it is still functioning.
+
+Failures Case
+>Network/Software(Temp)
+>Hardware
+
+>Master will come to know through hearbeat when a node is down.And Hadoop has Auto Failure(AF) process and tries to save copy of failed node and save it to anotehr node which doesn't hasve same blocks. This is for hardware failure.
+
+>Temp failure Node will get up again, the amount of data copied to other node is now considered by master to be in that node, and you have to clear those blocks from that node. So it's better to remove the full node and add it again, as AF
+will take place.
+
+>From h2 HA(High Availability) is ensured in Hadoop, meaning we can handle master going down.
+How they implemented HA?
+>Have more copy of master, One is active other are passive.Zookeeper handles that  , when active is down it activates one of other passive ones. We have a zonal node as well which saves the meta data.
+
+Types of Node:
+H1                         H2(Without HA)
+>Master Node               >Master Node
+>Slave Node                >Slave Node
+>Checkpoint Node           >Secondary Name Node
+                                                                                                    
+Types of cluster
+
+H1:
+1.Single Node(Pseudo node) : In one node all master slaves etc.No replication
+2.Distributed cluster: have more than one nodes.
+Hadoop best practice have atleast 5 nodes.(1 master,3 Slave,1 secondary)
+You can play around with less.
+
+H2:
+SNN is automatic.
 
 
-
+{Not clear with daemon names, which maskes a master or slave}
 
 
  
