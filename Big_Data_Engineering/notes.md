@@ -134,6 +134,38 @@ SNN is automatic.
 
 {Not clear with daemon names, which maskes a master or slave}
 
+##Hadoop Framework Overview
+
+>2002 : GFS
+>2004 : GMR(Data processing saved in GFS)
+>2005-06 : Hadoop released (HDFS and MR)(Base hadoop has only this 2 componenet)
+
+Various people added component on top this hadoop resulting in various hadoop framework.Some of them are:
+>Hive : Most widely used with any hadoop project.Developed by fb.So hive has similar to sql language and you write your query and hive converts it to java and interact with MR.
+>Pig:Invented by yahoo.PigLatin scripting language used, same issue don't want to use only java, same function as hive.
+>Scoop : Group of memebers invented it.Need something to bring data from db to Hadoop, so need to write MR code.No language as such, has command to import/ export commands so data from hadoop to db and db to hadoop.Internally all commands or java.Any RDBMS works.
+>OOzie : Some xml configuration for scheduling works.(Not majorly used, many other tools can be used).
+All above uses MR so they are abstractions of MR.Many other componenets are there but these 4 are using MR and it's their abstraction.
+
+>hBase : Hadoop's db.Developed by fb,language is different from sql.
+>Mahout : Data science stuffs AI/ML.
+>Flume : Like pipeline like scoop but can have real time data as well.Like messaging queue.Only for import data.
+
+Basically these 9ish components are called hadoop framework.Various others are there as well.
+
+All components are loosly connected.Most framwework in big data are loosly connected.
+There is scenario to connect with other big data framework like spark etc.
+Non big data tech is also allowed like scoop is used from RDBMS to hadoop and vice versa.
+
+Layers of these componenets
+>Storage : HDFS, hBase
+>Processing : Hive,Pig,MR
+>Data Pipeline : Scoop, flume
+>Scheduling : OOzie
+>Mahout : AI/ML Data Science.
+
+
+
 
  
 
