@@ -134,7 +134,7 @@ SNN is automatic.
 
 {Not clear with daemon names, which maskes a master or slave}
 
-##Hadoop Framework Overview
+## Hadoop Framework Overview
 
 >2002 : GFS
 >2004 : GMR(Data processing saved in GFS)
