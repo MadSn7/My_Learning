@@ -84,6 +84,18 @@ Ex
 
 2.Custom :  You create it according to you needs and configuration.
 
+### Subnets
+- Group of ip addresses in vpc
+- Reside within a single Availability zone
+- Subnets can be made private or public to allow external access to resource within them.
+- Subnet must be within vpc's cidr range
+- Subnet block size between /16 to /28
+- Subnets cannot overlap with other subnets within vpc(Np common ip address)
+- A subnet allows for an oprional ipv6 CIDR and can be used only with IPV6 and remove ipv4.
+- By default subnets within a vpc can communicate with each other
+- Auto assign ipv4/6 public address.
+
+
     
 
 
