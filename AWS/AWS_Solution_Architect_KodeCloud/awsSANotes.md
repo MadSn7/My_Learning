@@ -79,6 +79,7 @@ Ex
 - So any reource in default subnets will have internet access and any device on internet will have this subnet reource access.
 - Default security group: By default allows outbound traffic.
 - Default Network Access Control List : Allows both inbound and outbound traffic.
+<img width="1418" alt="Screenshot 2023-12-24 at 8 36 18 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6b9a5a13-e8a7-47ff-a14d-7679c6e3fe22">
 
 
 2.Custom :  You create it according to you needs and configuration.
