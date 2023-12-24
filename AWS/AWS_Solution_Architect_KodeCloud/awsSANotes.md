@@ -67,6 +67,7 @@ Ex
 - have upto 5 IPv6 cidr blocks
 
 >Two types VPC
+<img width="1368" alt="Screenshot 2023-12-24 at 8 26 18 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/63424445-d3ae-4a33-b5ea-1f983c21d805">
 
 1.Default : Whenever you create your aws account, aws is configure a vpc for you , not one but for all regions you have access too.
 - Idea is to have a start to create resources without much issues.
