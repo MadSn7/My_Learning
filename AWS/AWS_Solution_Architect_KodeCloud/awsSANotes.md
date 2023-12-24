@@ -94,6 +94,7 @@ Ex
 - A subnet allows for an oprional ipv6 CIDR and can be used only with IPV6 and remove ipv4.
 - By default subnets within a vpc can communicate with each other
 - Auto assign ipv4/6 public address.
+<img width="1416" alt="Screenshot 2023-12-24 at 10 27 45 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/05cd4c1f-7a15-4f6d-9fc4-a1f07d8c3c53">
 
 
     
