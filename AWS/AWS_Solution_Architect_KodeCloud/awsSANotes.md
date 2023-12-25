@@ -129,6 +129,7 @@ Ex
     - Now configure route of private subnet to access public subnet's NAT Gateway.
     - So flow server(private subnet) -> Nat Gateway(Public subnet) -> IGW -> Internet
     - And as server doesn't have public ip no access to it from internet.
+<img width="1431" alt="Screenshot 2023-12-25 at 3 01 15 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/635a8e9f-ffdb-4c9f-bf6f-44f9e58f1ab9">
 - Above process shows IGW is needed even when NAT gateways are used, can think of nat gateway as some server in public subnets
 - Charged per hour and per GB of data processed(Can process 5 GB/hr can automatically scales upto 100GB/hr)
 - Nat gateway are not region resilient like IGW,
