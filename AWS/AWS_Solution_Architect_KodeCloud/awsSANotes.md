@@ -138,6 +138,55 @@ Ex
 (Each subnet must reside entirely within one Availability Zone and cannot span zones), you deploy NAT on subnet so have to deploy on multiple az's for resiliency(1 NAT for each AZs)
 - Uses Elastic IPs(A fixed ip,won't change)
 
+### DNS(Domain Name System)
+- Vpc ip + 2, is the address for DNS server.So vpc 10.10.0.0/16 -> 10.10.0.2
+- Every resource has an internal ip, they can have domain name as well which can be used.
+- By default private subnets gets domain name, in public you need to explicitly need to enable it.(default vpc it is enabled even though it's public)
+- Services internally ping dns server when domain name is encountered to get private ips to communicate.
+
+- enableDnsHostnames	
+Determines whether the VPC supports assigning public DNS hostnames to instances with public IP addresses.The default for this attribute is false unless the VPC is a default VPC.
+
+- enableDnsSupport	
+Determines whether the VPC supports DNS resolution through the Amazon provided DNS server.If this attribute is true, queries to the Amazon provided DNS server succeed. 
+The default for this attribute is true.
+
+### Elastic IPs
+- When we deploy an EC2 instance, when they get redeployed the public ip will most time changes, so issue for end user to again access it.
+- It is a static ipv4 address, it will be reserved for your account, and you can associate with ec2 instance.
+- So when ec2 instance reboot, we will still have that ip address, can assign sg to elastic ip.
+- Specific to a region,address are provided from aws provided or you canbring your own.
+- When updating an ec2 we can assign this elastic ip to another one and keep our service running.
+- `check it's pricing`
+
+### Security Groups & NACLs
+- They both act as a firewall.Firewall monitor traffic and only allow traffic permitted by a set of predefined rules.
+- This rules break down to two parts
+    - Inbound Rules
+    - Outbound Rules
+- Two types of firewall
+    - Stateless : Both rules(in & out) must be configured.
+
+
+    - Stateful : It knows the response for a particular request, so if a request is permitted, response is automatically permitted.So no need for that particlar request's outbound rule.
+
+#### NACL(Network Access Control List)
+- They monitor traffic entering and leaving a subnet, and don't work withing subnet(Like RAW)
+- They are stateless, so need both inbound and outbound rules.
+- They can allow or deny traffic
+- Rule Fields have rule no*,type,protocol,port, ip, Allow/Deny.(lower the rule no, earlier it will be processed)
+- Every subnet must be associated with a NACLs
+- NACLs can be associated with multiple subnets, but a subnet must have one NACl.
+- Some traffic are not filtered by NACLs like amazon dns,ecs task metadata, windows update etc. 
+
+#### SG(Security Groups)
+- They act as a firewall for individual resources(EC2,LB,RDS etc)
+- They are stateful, so only request need to be allowed, response will be automatically allowed(request may be inbound or outbound)
+- A Rule have various property like protcols , port, from source ip/sg etc etc.(similar inbound and outbound)
+- Sg Group if there are no rules blocks everything
+- All rules are for allow traffic, doesn't have block rule.
+- Can assign multiple security group to a single resource, what ultimately happens is both groups rule get merged, combined will take place.
+- By default sg group has rule to allow all outbound traffic,can delete this rule.
 
     
 
