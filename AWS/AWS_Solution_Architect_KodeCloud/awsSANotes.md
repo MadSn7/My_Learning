@@ -197,6 +197,8 @@ The default for this attribute is true.
 Client should have one ip address not all.So one leastic ip doesn't work.
 - Now we have a load balancer whose ip will be hit by user and it will load balance the request to several attached ec2's for the application.
 - So only ip to know is of elb, and we get abstraction for server as well.
+<img width="1406" alt="Screenshot 2023-12-26 at 9 26 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/3fbe3b5c-4424-49de-b6a4-109c7bd4be76">
+
 - AWS has 3 types of load balancer
     - Classic LB 
         -  First lb introduced by aws, not recommended for use now.
@@ -210,7 +212,8 @@ Client should have one ip address not all.So one leastic ip doesn't work.
         - SSL certificates resides on ALB
         - From ALB to server communication is unencrypted but you can make it encrypted by adding another ssl certificate you have to manage.
     
-    
+    <img width="1237" alt="Screenshot 2023-12-26 at 9 36 33 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/91005d96-6e27-4c53-a3db-a7549568265c">
+
     - Network LB
         - Based on Layer 4 (TCP/UDP)
         - Mean for use when using applications not using http/https
@@ -218,14 +221,20 @@ Client should have one ip address not all.So one leastic ip doesn't work.
         - Health checks are based on ICMP/TCP connection
         - NLB forwards TCP to your instances, whereas in ALB it is terminated on ALB
         - Need ssl certificate on server, session is between client and server, NLB silent middleman
+<img width="1225" alt="Screenshot 2023-12-26 at 9 41 11 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6260b2e8-00ac-4c14-ba75-8f869130a2c9">
+
 - Process to deploy
     - Need to select the different AZs we want our LB to handle so different subnets basically.
     - So you have to deploy LB node into that subnet of your chosing which in turn will balance traffic in same subnet or another one, wherever your resources are present.
+<img width="1400" alt="Screenshot 2023-12-26 at 9 51 55 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6a74c305-36c7-427f-b614-2f1389ef7524">
+
 
 - Cross-Zone load Balancing : Issue If any azs has less or more number of servers running, so to LB node traffic is balanced but for each server gets imbalanced.As in fig
+<img width="1322" alt="Screenshot 2023-12-26 at 9 56 22 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/33c5a241-d256-4529-85a1-47b515e52d1a">
 
 
     - Reolution is allowing LB nodes to handle other az's too.
+<img width="1286" alt="Screenshot 2023-12-26 at 9 58 02 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ac3c3ee2-e813-4f0d-99b3-fe1d3b00752b">
 
 - Deployment
     - Similar deployment like ec2
@@ -233,6 +242,7 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - Two peices of configs needed
         - Listeners : It's a process, depend on your application, checks for says eg request on a prticular ip.
         - Target Groups : It is the place where the listened request is targetted to.Eg EC2's
+<img width="1335" alt="Screenshot 2023-12-26 at 10 08 21 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d9b03e94-a7f9-4474-a584-a7ee16ccfdcd">
 
 
 
