@@ -166,9 +166,11 @@ The default for this attribute is true.
     - Outbound Rules
 - Two types of firewall
     - Stateless : Both rules(in & out) must be configured.
+    <img width="1432" alt="Screenshot 2023-12-26 at 6 58 28 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ec0697ef-0999-4d51-b17b-141a16899a1c">
 
 
     - Stateful : It knows the response for a particular request, so if a request is permitted, response is automatically permitted.So no need for that particlar request's outbound rule.
+    <img width="1427" alt="Screenshot 2023-12-26 at 7 02 12 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/25f94933-1083-473b-9009-20aae149d905">
 
 #### NACL(Network Access Control List)
 - They monitor traffic entering and leaving a subnet, and don't work withing subnet(Like RAW)
