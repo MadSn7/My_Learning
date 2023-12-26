@@ -258,7 +258,8 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - For each available vpn connection per hour
     - For data outbound from aws to on prem.
 
-`vpn image here`
+![Screenshot 2023-12-26 at 2 18 09 PM](https://github.com/MadSn7/My_Learning/assets/62552772/3571bc69-54f4-47fa-bcad-fa664e08b1bd)
+
 
 ### Direct Connect
 - Direct connection to aws resources, alternative to vpn where we go over the internet.
@@ -268,7 +269,8 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - Port hours
     - Outbound data
 
-`Direct connect  image here`
+![Screenshot 2023-12-26 at 2 25 33 PM](https://github.com/MadSn7/My_Learning/assets/62552772/90047dea-1891-4725-b4e4-f882a2b88bf8)
+
 
 ### VPC Peering
 - By default two vpc can't communicate, but what if we want them to?
@@ -285,21 +287,26 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 - Owner of one vpc send peering request to another vpc's owner, and that will create peering.
 - We have to create routes both sides, and target will be peering name.
 
-`vpc peering image`
+![Screenshot 2023-12-26 at 2 57 27 PM](https://github.com/MadSn7/My_Learning/assets/62552772/2bbd6da6-a8bf-4e37-9db6-f5a28b900adc)
+
 
 ### Transit Gateway
 - Transitive peering is not allowed, so for n vpc's connection need nC2 peerings, also from on prem vpn connection require cusotmer gateway connection to all vpc
+- ![Screenshot 2023-12-26 at 4 28 05 PM](https://github.com/MadSn7/My_Learning/assets/62552772/a77c396b-d543-405d-81f4-0e25a33ff897)
+
 - Create to avoid full mesh of vpc peering, so now only need to connect to aws transit gateway.
 - O prem also need to connect to transit gateway.
 - Transit gateway can connect with other transit gateways of other accounts too.
 
-`transit gateway image`
+![Screenshot 2023-12-26 at 4 31 31 PM](https://github.com/MadSn7/My_Learning/assets/62552772/d83c17be-fe03-4624-ab2e-1c64fb4e7fd0)
+
 
 ### Private Link
 - For s3 connection need to go over internet, so issue in private subnets if we don't want to go over internet.As S3 is public service.
 - Private Link give direct access to reources even to other vpc
 
-`private link ss`
+![Screenshot 2023-12-26 at 4 36 32 PM](https://github.com/MadSn7/My_Learning/assets/62552772/eddc9840-682c-49ce-ac9d-802ba361f05a)
+
 
 
 
