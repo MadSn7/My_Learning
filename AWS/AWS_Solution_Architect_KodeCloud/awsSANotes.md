@@ -171,6 +171,7 @@ The default for this attribute is true.
 
     - Stateful : It knows the response for a particular request, so if a request is permitted, response is automatically permitted.So no need for that particlar request's outbound rule.
     <img width="1427" alt="Screenshot 2023-12-26 at 7 02 12 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/25f94933-1083-473b-9009-20aae149d905">
+(Grey ones not necessary above)
 
 #### NACL(Network Access Control List)
 - They monitor traffic entering and leaving a subnet, and don't work withing subnet(Like RAW)
@@ -184,14 +185,54 @@ The default for this attribute is true.
 #### SG(Security Groups)
 - They act as a firewall for individual resources(EC2,LB,RDS etc)
 - They are stateful, so only request need to be allowed, response will be automatically allowed(request may be inbound or outbound)
-- A Rule have various property like protcols , port, from source ip/sg etc etc.(similar inbound and outbound)
+- A Rule have various property like protcols , port, from source ip/sg(same sg as well) etc etc.(similar inbound and outbound)
 - Sg Group if there are no rules blocks everything
 - All rules are for allow traffic, doesn't have block rule.
 - Can assign multiple security group to a single resource, what ultimately happens is both groups rule get merged, combined will take place.
 - By default sg group has rule to allow all outbound traffic,can delete this rule.
+- Same sg can be applied to various resources.
 
+### Elastic Load Balancer(ELB)
+- Issue : Application running on ec2 instance(ip is x), now we need to handle high traffic and ensure availability so have several instance running, in different azs, now they will have different ip(ips x,y,z etc)?How to handle request now from user?
+Client should have one ip address not all.So one leastic ip doesn't work.
+- Now we have a load balancer whose ip will be hit by user and it will load balance the request to several attached ec2's for the application.
+- So only ip to know is of elb, and we get abstraction for server as well.
+- AWS has 3 types of load balancer
+    - Classic LB 
+        -  First lb introduced by aws, not recommended for use now.
+        - Various limitations like one ssl used.
+        - Don't use for any new application, maybe some legacy ones using it.
+    - Application LB
+        - Works for web based applications, so works only with http/https/web-sockets
+        - Operates at application layer(Layer 7)
+        - Can Forward request based of conditions of path ips etc
+        - Can perform application related health checks
+        - SSL certificates resides on ALB
+        - From ALB to server communication is unencrypted but you can make it encrypted by adding another ssl certificate you have to manage.
     
+    
+    - Network LB
+        - Based on Layer 4 (TCP/UDP)
+        - Mean for use when using applications not using http/https
+        - Fater than Application LBs
+        - Health checks are based on ICMP/TCP connection
+        - NLB forwards TCP to your instances, whereas in ALB it is terminated on ALB
+        - Need ssl certificate on server, session is between client and server, NLB silent middleman
+- Process to deploy
+    - Need to select the different AZs we want our LB to handle so different subnets basically.
+    - So you have to deploy LB node into that subnet of your chosing which in turn will balance traffic in same subnet or another one, wherever your resources are present.
 
+- Cross-Zone load Balancing : Issue If any azs has less or more number of servers running, so to LB node traffic is balanced but for each server gets imbalanced.As in fig
+
+
+    - Reolution is allowing LB nodes to handle other az's too.
+
+- Deployment
+    - Similar deployment like ec2
+    - Can deploy them as public or private load balancers(in public subnet or private subnet)
+    - Two peices of configs needed
+        - Listeners : It's a process, depend on your application, checks for says eg request on a prticular ip.
+        - Target Groups : It is the place where the listened request is targetted to.Eg EC2's
 
 
 
