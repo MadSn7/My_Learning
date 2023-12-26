@@ -212,7 +212,7 @@ Client should have one ip address not all.So one leastic ip doesn't work.
         - SSL certificates resides on ALB
         - From ALB to server communication is unencrypted but you can make it encrypted by adding another ssl certificate you have to manage.
     
-    <img width="1237" alt="Screenshot 2023-12-26 at 9 36 33 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/91005d96-6e27-4c53-a3db-a7549568265c">
+        <img width="1237" alt="Screenshot 2023-12-26 at 9 36 33 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/91005d96-6e27-4c53-a3db-a7549568265c">
 
     - Network LB
         - Based on Layer 4 (TCP/UDP)
@@ -221,20 +221,19 @@ Client should have one ip address not all.So one leastic ip doesn't work.
         - Health checks are based on ICMP/TCP connection
         - NLB forwards TCP to your instances, whereas in ALB it is terminated on ALB
         - Need ssl certificate on server, session is between client and server, NLB silent middleman
-<img width="1225" alt="Screenshot 2023-12-26 at 9 41 11 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6260b2e8-00ac-4c14-ba75-8f869130a2c9">
+        <img width="1225" alt="Screenshot 2023-12-26 at 9 41 11 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6260b2e8-00ac-4c14-ba75-8f869130a2c9">
 
 - Process to deploy
     - Need to select the different AZs we want our LB to handle so different subnets basically.
     - So you have to deploy LB node into that subnet of your chosing which in turn will balance traffic in same subnet or another one, wherever your resources are present.
-<img width="1400" alt="Screenshot 2023-12-26 at 9 51 55 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6a74c305-36c7-427f-b614-2f1389ef7524">
-
-
-- Cross-Zone load Balancing : Issue If any azs has less or more number of servers running, so to LB node traffic is balanced but for each server gets imbalanced.As in fig
-<img width="1322" alt="Screenshot 2023-12-26 at 9 56 22 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/33c5a241-d256-4529-85a1-47b515e52d1a">
+    <img width="1400" alt="Screenshot 2023-12-26 at 9 51 55 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6a74c305-36c7-427f-b614-2f1389ef7524">
+- Cross-Zone load Balancing : 
+    - Issue If any azs has less or more number of servers running, so to LB node traffic is balanced but for each server gets imbalanced.As in fig
+    <img width="1322" alt="Screenshot 2023-12-26 at 9 56 22 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/33c5a241-d256-4529-85a1-47b515e52d1a">
 
 
     - Reolution is allowing LB nodes to handle other az's too.
-<img width="1286" alt="Screenshot 2023-12-26 at 9 58 02 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ac3c3ee2-e813-4f0d-99b3-fe1d3b00752b">
+    <img width="1286" alt="Screenshot 2023-12-26 at 9 58 02 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ac3c3ee2-e813-4f0d-99b3-fe1d3b00752b">
 
 - Deployment
     - Similar deployment like ec2
@@ -242,8 +241,65 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - Two peices of configs needed
         - Listeners : It's a process, depend on your application, checks for says eg request on a prticular ip.
         - Target Groups : It is the place where the listened request is targetted to.Eg EC2's
-<img width="1335" alt="Screenshot 2023-12-26 at 10 08 21 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d9b03e94-a7f9-4474-a584-a7ee16ccfdcd">
+        <img width="1335" alt="Screenshot 2023-12-26 at 10 08 21 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d9b03e94-a7f9-4474-a584-a7ee16ccfdcd">
+- Basic work, deploy elb with listener at recommended port like 80 and http, set target to like ec2, lambda etc and then hit dns provided for load balancer to hit your application(Above seen for ALB)
+    - Usually keep server in private subnet, and lb in public one so only lb have public access.
 
+### VPN and it's usage in AWS
+- Need a secure way to connect on-prem devices network to aws's subnet usually private.
+- 1.25 GBPS bandwidth
+- Process
+    - Deploy VPN gateway on vpc.(Terminates local vpc vpn)
+    - On Prem Side, deploy customer gateway(Terminates on prem vpn)
+    - Then customer gateway and vpn gateway will get public ip address
+    - Then we will establish and IPSec tunnel over internet between them.
+    - For routing we can have static protocols added or have dynamic rule added via BGP
+- Pricing
+    - For each available vpn connection per hour
+    - For data outbound from aws to on prem.
+
+`vpn image here`
+
+### Direct Connect
+- Direct connection to aws resources, alternative to vpn where we go over the internet.
+- Physically connect to aws resources, high speed reliable connection so it's a physical connection.
+- for private subnet need to go thorugh vpn gateway again, for publi can go direct from direct location, on prem should have customer gateway
+- Pricing
+    - Port hours
+    - Outbound data
+
+`Direct connect  image here`
+
+### VPC Peering
+- By default two vpc can't communicate, but what if we want them to?
+- We set vpc peering and the resources can communicate netween them.
+- Transitive vpc peering not allowed, so for peering two vpc we need to set peering can't have trasitive.
+- VPC peering can be set between
+    - VPC in same region
+    - VPC in different region
+    - VPC in different account.
+- Pricing
+    - No cost for peering connection
+    - Same azs data trasfer no charge
+    - Differnent azs cost for data transfer
+- Owner of one vpc send peering request to another vpc's owner, and that will create peering.
+- We have to create routes both sides, and target will be peering name.
+
+`vpc peering image`
+
+### Transit Gateway
+- Transitive peering is not allowed, so for n vpc's connection need nC2 peerings, also from on prem vpn connection require cusotmer gateway connection to all vpc
+- Create to avoid full mesh of vpc peering, so now only need to connect to aws transit gateway.
+- O prem also need to connect to transit gateway.
+- Transit gateway can connect with other transit gateways of other accounts too.
+
+`transit gateway image`
+
+### Private Link
+- For s3 connection need to go over internet, so issue in private subnets if we don't want to go over internet.As S3 is public service.
+- Private Link give direct access to reources even to other vpc
+
+`private link ss`
 
 
 
