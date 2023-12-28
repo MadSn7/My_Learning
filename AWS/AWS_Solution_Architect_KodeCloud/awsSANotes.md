@@ -307,6 +307,50 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 
 ![Screenshot 2023-12-26 at 4 36 32 PM](https://github.com/MadSn7/My_Learning/assets/62552772/eddc9840-682c-49ce-ac9d-802ba361f05a)
 
+### CloudFront
+- Your server is in USA and user access from India or Australia, it going to cause latency issue.
+- AWS has provided edge locations(more in number than regions), you can cache you files in this edge locations.Edge locations are hlepful for various selected services.
+- Amazon CloudFront is a content delivery network (CDN) service.
+- Speed up media files, css, html etc files.
+- Architecture/Process
+    - Origin : like s3 bucket, server containing images etc
+    - Now cloudfront will cache this in edge locations.
+    - Users can get content now from edge locations.
+    
+    `Architectur image here`
 
+    -Distribution : Configuration unit/block, tells source file locations, provides a global domain name.
+    - New content if not found, will be asked from origin and then later cached for upcoming requests.
+- TTL(Time to Live) :  Cached content timelife, default is 24 hours.Then again requests to origin and caches again.you can set your own TTL.
+- Cache Invalidation : Allows to invalidate cached contents, you can do it when you update your original content.Manual process to clear caches.Can invalidate all objects from distrubuition or particalr object.EG : /* all object clear,/fileName,/folderName
+-  Can have custom domainName, automatic cloudWatch logs extra cost you can include more metrics.
+- Most useful uses are static websites, videos on demand, streaming etc.
+- `Anohter image here`
+
+### Lambda@Edge and CloudFront Functions
+- Can run lightweight lambdas, cloudFronFunctions at edge locations to do small works and verifications etc.So less erver work.
+- Both CloudFront functions and Lambdas are different
+    - CloudFront Functions : Runs when recieves a request  from viewer and also before sending the response back.
+        - Ideal for leighweight operqations, like cache key normalizations, header maniulations, ur redirects/rewrites, authorizations like json
+    - Lambda@Edge : Both above as well as before forward request to rigin and also after reciecving a response from origin.
+        - Ideal for little long running funciton, changing memory/cpu requiring functions, third party dependency, network-dependent functions, need body for http
+`the compare picture`
+
+### Global Accelator
+- If request need to go to server it go through internet and it takes time, inefficient and take long path basically whatever available.
+- They also have edge locations, bit dierent from cloudfronEdge locatins
+_ when user hit the request, it goes to nearby global accelator edge locations and it then takes from there so fast, secure reliable than internet.
+- cloudfron is for cache objects, whereas global accelator if for routing quickly to aws network. 
+`aws global accfelator image`
+
+### Route 53
+- AWS managed DNS service, acts as domain registrar, can purchase domain here and can manage your domain name from here.Global service not particular to region.
+- Hosted Zones : Collection for dns rules and records, what happens and aws allocate 4 name servers for it.
+- basically purchase a domain name, and attach alias for your server etc public ip, then using domain name can reach server ip.
+
+`4 server image here`
+
+### Route 53 Application Recovery Controller
+- Way to check if you application is running or not, scale up etc instead of using various other tools.
 
 
