@@ -317,7 +317,7 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - Now cloudfront will cache this in edge locations.
     - Users can get content now from edge locations.
     
-    `Architectur image here`
+    <img width="1316" alt="Screenshot 2023-12-27 at 7 34 15 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f9350b94-8fbd-4165-81ba-34475d016457">
 
     -Distribution : Configuration unit/block, tells source file locations, provides a global domain name.
     - New content if not found, will be asked from origin and then later cached for upcoming requests.
@@ -325,16 +325,19 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 - Cache Invalidation : Allows to invalidate cached contents, you can do it when you update your original content.Manual process to clear caches.Can invalidate all objects from distrubuition or particalr object.EG : /* all object clear,/fileName,/folderName
 -  Can have custom domainName, automatic cloudWatch logs extra cost you can include more metrics.
 - Most useful uses are static websites, videos on demand, streaming etc.
-- `Anohter image here`
+- <img width="1295" alt="Screenshot 2023-12-27 at 7 44 14 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/497013e5-e675-4ba9-9f8f-f7c960ff9393">
+
 
 ### Lambda@Edge and CloudFront Functions
-- Can run lightweight lambdas, cloudFronFunctions at edge locations to do small works and verifications etc.So less erver work.
+- Can run lightweight lambdas, cloudFronFunctions at edge locations to do small works and verifications etc.So less server work.
+- <img width="942" alt="Screenshot 2023-12-27 at 8 15 34 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/684da6cc-0a70-4457-a132-b0b980e67d65">
+
 - Both CloudFront functions and Lambdas are different
     - CloudFront Functions : Runs when recieves a request  from viewer and also before sending the response back.
         - Ideal for leighweight operqations, like cache key normalizations, header maniulations, ur redirects/rewrites, authorizations like json
     - Lambda@Edge : Both above as well as before forward request to rigin and also after reciecving a response from origin.
         - Ideal for little long running funciton, changing memory/cpu requiring functions, third party dependency, network-dependent functions, need body for http
-`the compare picture`
+<img width="1350" alt="Screenshot 2023-12-27 at 8 18 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/467fb3ed-edb8-456f-b092-82b4be533448">
 
 ### Global Accelator
 - If request need to go to server it go through internet and it takes time, inefficient and take long path basically whatever available.
@@ -342,15 +345,17 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 _ when user hit the request, it goes to nearby global accelator edge locations and it then takes from there so fast, secure reliable than internet.
 - cloudfron is for cache objects, whereas global accelator if for routing quickly to aws network. 
 `aws global accfelator image`
+<img width="939" alt="Screenshot 2023-12-27 at 8 22 49 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/88c02c9b-078e-43f6-8484-86d798bb1933">
+
 
 ### Route 53
 - AWS managed DNS service, acts as domain registrar, can purchase domain here and can manage your domain name from here.Global service not particular to region.
 - Hosted Zones : Collection for dns rules and records, what happens and aws allocate 4 name servers for it.
 - basically purchase a domain name, and attach alias for your server etc public ip, then using domain name can reach server ip.
-
-`4 server image here`
+<img width="1016" alt="Screenshot 2023-12-27 at 8 26 22 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d98696cc-7128-4f8f-b012-2d4a6c897fd2">
 
 ### Route 53 Application Recovery Controller
 - Way to check if you application is running or not, scale up etc instead of using various other tools.
+<img width="1424" alt="Screenshot 2023-12-28 at 6 27 51 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/07338402-3b68-40ef-9c51-820202da0ef8">
 
 
