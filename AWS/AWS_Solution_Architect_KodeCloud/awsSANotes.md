@@ -291,13 +291,12 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 
 
 ### Transit Gateway
-- Transitive peering is not allowed, so for n vpc's connection need nC2 peerings, also from on prem vpn connection require cusotmer gateway connection to all vpc
-- ![Screenshot 2023-12-26 at 4 28 05 PM](https://github.com/MadSn7/My_Learning/assets/62552772/a77c396b-d543-405d-81f4-0e25a33ff897)
+- Transitive peering is not allowed, so for n vpc's connection need nC2 peerings, also from on prem vpn connection require cusotmer gateway connection to all vpc    
+![Screenshot 2023-12-26 at 4 28 05 PM](https://github.com/MadSn7/My_Learning/assets/62552772/a77c396b-d543-405d-81f4-0e25a33ff897)
 
 - Create to avoid full mesh of vpc peering, so now only need to connect to aws transit gateway.
 - O prem also need to connect to transit gateway.
 - Transit gateway can connect with other transit gateways of other accounts too.
-
 ![Screenshot 2023-12-26 at 4 31 31 PM](https://github.com/MadSn7/My_Learning/assets/62552772/d83c17be-fe03-4624-ab2e-1c64fb4e7fd0)
 
 
@@ -316,22 +315,20 @@ Client should have one ip address not all.So one leastic ip doesn't work.
     - Origin : like s3 bucket, server containing images etc
     - Now cloudfront will cache this in edge locations.
     - Users can get content now from edge locations.
-    
-    <img width="1316" alt="Screenshot 2023-12-27 at 7 34 15 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f9350b94-8fbd-4165-81ba-34475d016457">
-
     -Distribution : Configuration unit/block, tells source file locations, provides a global domain name.
     - New content if not found, will be asked from origin and then later cached for upcoming requests.
+    <img width="1316" alt="Screenshot 2023-12-27 at 7 34 15 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f9350b94-8fbd-4165-81ba-34475d016457">
+
 - TTL(Time to Live) :  Cached content timelife, default is 24 hours.Then again requests to origin and caches again.you can set your own TTL.
 - Cache Invalidation : Allows to invalidate cached contents, you can do it when you update your original content.Manual process to clear caches.Can invalidate all objects from distrubuition or particalr object.EG : /* all object clear,/fileName,/folderName
 -  Can have custom domainName, automatic cloudWatch logs extra cost you can include more metrics.
 - Most useful uses are static websites, videos on demand, streaming etc.
-- <img width="1295" alt="Screenshot 2023-12-27 at 7 44 14 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/497013e5-e675-4ba9-9f8f-f7c960ff9393">
+<img width="1295" alt="Screenshot 2023-12-27 at 7 44 14 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/497013e5-e675-4ba9-9f8f-f7c960ff9393">
 
 
 ### Lambda@Edge and CloudFront Functions
 - Can run lightweight lambdas, cloudFronFunctions at edge locations to do small works and verifications etc.So less server work.
-- <img width="942" alt="Screenshot 2023-12-27 at 8 15 34 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/684da6cc-0a70-4457-a132-b0b980e67d65">
-
+<img width="942" alt="Screenshot 2023-12-27 at 8 15 34 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/684da6cc-0a70-4457-a132-b0b980e67d65">
 - Both CloudFront functions and Lambdas are different
     - CloudFront Functions : Runs when recieves a request  from viewer and also before sending the response back.
         - Ideal for leighweight operqations, like cache key normalizations, header maniulations, ur redirects/rewrites, authorizations like json
@@ -351,11 +348,98 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 ### Route 53
 - AWS managed DNS service, acts as domain registrar, can purchase domain here and can manage your domain name from here.Global service not particular to region.
 - Hosted Zones : Collection for dns rules and records, what happens and aws allocate 4 name servers for it.
+- Have various routing policy based on locations etc.
 - basically purchase a domain name, and attach alias for your server etc public ip, then using domain name can reach server ip.
 <img width="1016" alt="Screenshot 2023-12-27 at 8 26 22 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d98696cc-7128-4f8f-b012-2d4a6c897fd2">
 
 ### Route 53 Application Recovery Controller
 - Way to check if you application is running or not, scale up etc instead of using various other tools.
 <img width="1424" alt="Screenshot 2023-12-28 at 6 27 51 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/07338402-3b68-40ef-9c51-820202da0ef8">
+
+>Quiz Networking
+
+> 17/22 == 77% Correct
+
+`AWS Site-to-Site vpn vs aws vpn vs Direct connect?!`
+
+## Services - Storage
+### Elastic Block Storage(EBS)
+- Block Storage : It breaks data in blocks and stores them with unique identifer.A collection of this blocks can be attached to show as volume and OS can create File System onto it, as well as hard Drive on it so as to install OS/boot it
+- So it is both mountable and bootable
+- In AWS block storage is EBS service, provides block level storage volumes for your ec2 instances.
+- As they are seaprate from EC2, we can move data from one EC2 to other too.Tradionally one block is attached to one EC2 but now you can attach to more but make sure all don't overwrite each other's data.
+- Available within AZ's, both EC2 and EBS should be in same az, can't if in another az.
+- Basically create EBS storage and during creating EC2 attach that created storage.
+- To migrate data between az, we can take snapshots, which get stored in S3,now we can deploy EBS in another AZ, similar step for cross regions too.
+`image for EBS s3 another zone`
+- EBS volume types
+    - volume type images here
+    - General-Purpose SSD(gp2 & gp3)
+        - Volume backed by solid state drives(ssd)
+        - Balance price and perforamance
+        - Recommended for most workloads, if not sure use this.
+        - gp3 are latest generations and lowest cost,good for most application, 20% cheap than gp3
+        - gp2 are default EBS volume, performance increase with size increase
+    - Provisioned IOPS SSD(io1 & io2)
+        - Also backed by ssd, highest performance EBS, for critical high throughput , intensive workloads.Like DB etc.
+        - `basic difference chart image`
+        - io2 & io1 mostly similar, io2 more durable but io2 block express better.
+    - Thoughput - Optimized HDD(st1) and Cold HDD volumes(sc1)
+        - Based on HDD, `image here on difference`
+        - image here
+        - st1 : Big Data ,warehouse,log processing
+        - sc1 : cheapest one,data infrequent access.
+    - Magnetic Volume(previous generation)
+        - Depend on magnetic drive
+        - `magnetic detail image`
+    - price per GB per month,faster iops  Cost
+- lsblk command in ec2's terminal to check all blocks listed.linux /dev/(xvdf etc naming) usual path of block access.
+- sudo file -s /dev/(xvdf etc path), if reply data means no file system present
+- Then we can create file system sudo mkfs etc command, and various stuff in command line and linux specific you can do.
+- you can mount the volume to a folder so as to use that folder store things there to be saved in ebs.
+
+
+### Instance Store
+- Temporary block level storage
+- Physically on system your server is on, on the host machine, so issue is if host moves so data is lost, if same host no issue.
+- REBOOT doesn't moves machines, but stop and stat does.
+- Not availble with free tiers instances like t2 micro etc.
+
+### EFS
+- First of two files sytsem sotrage provides(other is FSx)
+- Uses NFS (NFSv4) file system, windows doesn't work with it, only linux.
+- Can mount on multiple EC2
+- VPC specific deploy, specify subnets to get mount target which are an ip adress
+- Now ec2 instance can connect using this mount ip.
+- `how efs works image`
+- Different types
+    - Standard Storage Classes
+        - EFS Standard
+        - EFS Standard-Infrequesnt Access(Standard - IA)
+    - One Zone Storage Classes
+        - EFS One Zone
+        - EFS One Zone-Infrequesnt Access(EFS One Zone-IA)
+        `image of this two`
+- Various Modes
+    - General purpose perforamnce mode
+    - Elastic Throughput mode
+    -` 2 images of various modes`
+- Process
+    ``` 
+    sudo dnf -y install amazon-efs-utils
+    ```
+- Use above basic utilities, and then can mount efs file system to specific folder.Similar to any mounting, just get id from aws when creating efs
+    ``` 
+    sudo mount.efs efsId /directory
+    ```
+- EFS can be mounted but cannot be booted, can't isntall an operating system.Same commands for persisting reboot, 
+- It has storage lifecycle management as well, have sg as well.
+
+### FSx
+- Fully managed service provides high performance file storage and wide range of workloads, similar to EFS.
+- EFS works only with linux, fsx works with windows os as well including others.
+- Also allows shared access like efs.
+- Different types
+    - `images here`
 
 
