@@ -371,9 +371,10 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Available within AZ's, both EC2 and EBS should be in same az, can't if in another az.
 - Basically create EBS storage and during creating EC2 attach that created storage.
 - To migrate data between az, we can take snapshots, which get stored in S3,now we can deploy EBS in another AZ, similar step for cross regions too.
-`image for EBS s3 another zone`
+  <img width="1405" alt="Screenshot 2023-12-28 at 10 34 16 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/a948c244-d71c-4726-a89f-7fa852835a1a">
+
 - EBS volume types
-    - volume type images here
+    <img width="1411" alt="Screenshot 2023-12-28 at 10 35 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ca013ed9-613b-4e5e-8d71-4eb09162fb37">
     - General-Purpose SSD(gp2 & gp3)
         - Volume backed by solid state drives(ssd)
         - Balance price and perforamance
@@ -382,16 +383,17 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
         - gp2 are default EBS volume, performance increase with size increase
     - Provisioned IOPS SSD(io1 & io2)
         - Also backed by ssd, highest performance EBS, for critical high throughput , intensive workloads.Like DB etc.
-        - `basic difference chart image`
+        - <img width="1421" alt="Screenshot 2023-12-28 at 11 08 38 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f2ec5a08-e391-4889-844b-e77fce4a2888">
         - io2 & io1 mostly similar, io2 more durable but io2 block express better.
     - Thoughput - Optimized HDD(st1) and Cold HDD volumes(sc1)
-        - Based on HDD, `image here on difference`
-        - image here
+        - Based on HDD
+        - <img width="1397" alt="Screenshot 2023-12-28 at 11 13 10 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/504d3ab8-ac8c-4600-9788-24c22aca1ff3">
         - st1 : Big Data ,warehouse,log processing
         - sc1 : cheapest one,data infrequent access.
     - Magnetic Volume(previous generation)
         - Depend on magnetic drive
-        - `magnetic detail image`
+        - <img width="1217" alt="Screenshot 2023-12-28 at 11 27 13 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/5a29cb64-aea7-4b31-bfae-f74cdacadbde">
+
     - price per GB per month,faster iops  Cost
 - lsblk command in ec2's terminal to check all blocks listed.linux /dev/(xvdf etc naming) usual path of block access.
 - sudo file -s /dev/(xvdf etc path), if reply data means no file system present
@@ -411,7 +413,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Can mount on multiple EC2
 - VPC specific deploy, specify subnets to get mount target which are an ip adress
 - Now ec2 instance can connect using this mount ip.
-- `how efs works image`
+- <img width="1325" alt="Screenshot 2023-12-28 at 5 06 39 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d3f2dce6-bed1-4748-a36c-c7917169c97d">
 - Different types
     - Standard Storage Classes
         - EFS Standard
@@ -419,11 +421,14 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - One Zone Storage Classes
         - EFS One Zone
         - EFS One Zone-Infrequesnt Access(EFS One Zone-IA)
-        `image of this two`
+        ![Screenshot 2023-12-29 at 6 49 03 AM](https://github.com/MadSn7/My_Learning/assets/62552772/abac8f0c-3add-4fe1-9707-85bddbb45e74)
 - Various Modes
     - General purpose perforamnce mode
     - Elastic Throughput mode
-    -` 2 images of various modes`
+      ![Screenshot 2023-12-29 at 6 50 10 AM](https://github.com/MadSn7/My_Learning/assets/62552772/d7da403a-7019-47f3-a89c-93e99e062e3b)
+    ![Screenshot 2023-12-29 at 6 50 17 AM](https://github.com/MadSn7/My_Learning/assets/62552772/332f620a-498f-4458-b5bd-65497e6cef81)
+
+
 - Process
     ``` 
     sudo dnf -y install amazon-efs-utils
@@ -440,6 +445,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - EFS works only with linux, fsx works with windows os as well including others.
 - Also allows shared access like efs.
 - Different types
-    - `images here`
+  ![Screenshot 2023-12-29 at 7 10 24 AM](https://github.com/MadSn7/My_Learning/assets/62552772/2b02f764-9f58-4b95-a675-27ff52d3ff9d)
+
 
 
