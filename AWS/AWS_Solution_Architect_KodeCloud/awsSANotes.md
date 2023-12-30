@@ -511,7 +511,8 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
         - Not sure and have mix of data use this.
 - Under propeties can change storage types for each object, and can change it later as well.
 - You can configure S3 storage classes at the object level, and a single bucket can contain objects stored across S3 Standard, S3 Intelligent-Tiering, S3 Standard-IA, and S3 One Zone-IA. You can also use S3 Lifecycle policies to automatically transition objects between storage classes without any application changes.
-`chart of storage classes`
+![Screenshot 2023-12-29 at 10 10 22 AM](https://github.com/MadSn7/My_Learning/assets/62552772/613d9708-62ae-4adc-9eb2-65c39db85919)
+
 
 #### S3 - Versioning
 - Without versioning, if we delte file no way to bring it back,also can't upload new file with same name to update file, it will delte old same name object if we have same name.
@@ -551,7 +552,8 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Can allow to access at particular folder object as well, or allow access from particular range of ip.
 - IAM policy is for user, cannot be applied to anonymous user whereas a resource's policy is for a resource can include public etc rules/access.But they work together, so we need a allow from both.(For public only bucket policy works)
 - ACLs are predated legacy access control that predates IAM , not reco to use, cause they only allow some fixed policy.
-`image here for acl`
+<img width="1404" alt="Screenshot 2023-12-29 at 4 54 01 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/9c132abf-7bed-49b0-907d-d8f7314e7eff">
+
 
 #### S3 Static Webiste Hosting
 - We can store html,css, js, media etc in S3 bucket, now we can use it as hosting.
@@ -567,10 +569,13 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 #### S3 - Access Points
 - Different users should have diferent access to s3 and it's objects, and bucket policy can become very complicated if we follow that.
 - We can create separate access points, separate ARN so each user can have their view of S3, we can attach policy per access points.
-`2 images for access points`
+- You can transfer policy of bucket to access points policy or write policy in both bucket and access point, first one is better.
+![Screenshot 2023-12-30 at 8 32 49 AM](https://github.com/MadSn7/My_Learning/assets/62552772/7ad36e6b-3789-4119-b6fe-017fdd98d312)
+![Screenshot 2023-12-30 at 8 34 24 AM](https://github.com/MadSn7/My_Learning/assets/62552772/3bef628a-f37b-433f-b50e-07650236e6c6)
+
 
 ### AWS Backup
-`image covering diff `
+![Screenshot 2023-12-30 at 9 55 29 AM](https://github.com/MadSn7/My_Learning/assets/62552772/7b576b4a-4f58-4000-9aea-b57c466dbe44)
 -  Lots of service are present for disaster recovery
 - S3 is great for storing backup data,EBS as well, you can take snapshot of your data, on your scheduling.
 - AWS Backup is a service is unified console for managing AWS service, automates backup scheduling etc.Can access different regions and different accounts.
@@ -578,7 +583,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - Backup Vault : Container that stores your backup data, can have in various regions as well.
     - BackUp Plan : Configs for back up, scheduling etc.
     - Recovery Point : A point in time upto where you want to backup.
-`image for aw backup across regions`
+![Screenshot 2023-12-30 at 10 01 22 AM](https://github.com/MadSn7/My_Learning/assets/62552772/89431ad9-b00a-47cd-817e-289e3b8e71eb)
 - There are lot of service we can intergrate aws backup with ec2, rds, ebs etc, can monitor using eventbridge, cloudwatch, sns, cloudtrails etc. 
 
 ### Elastic Disaster Recovery
@@ -598,6 +603,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Storage gateway - Volume
     - Cached Mode
     - Stored Mode
-- Check again in revision?!
+  
+`Check again in revision?!`
 
 
