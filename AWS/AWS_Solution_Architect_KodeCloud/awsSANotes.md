@@ -371,10 +371,13 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Available within AZ's, both EC2 and EBS should be in same az, can't if in another az.
 - Basically create EBS storage and during creating EC2 attach that created storage.
 - To migrate data between az, we can take snapshots, which get stored in S3,now we can deploy EBS in another AZ, similar step for cross regions too.
-  <img width="1405" alt="Screenshot 2023-12-28 at 10 34 16 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/a948c244-d71c-4726-a89f-7fa852835a1a">
+
+    <img width="1405" alt="Screenshot 2023-12-28 at 10 34 16 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/a948c244-d71c-4726-a89f-7fa852835a1a">
 
 - EBS volume types
+    
     <img width="1411" alt="Screenshot 2023-12-28 at 10 35 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ca013ed9-613b-4e5e-8d71-4eb09162fb37">
+    
     - General-Purpose SSD(gp2 & gp3)
         - Volume backed by solid state drives(ssd)
         - Balance price and perforamance
@@ -383,16 +386,16 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
         - gp2 are default EBS volume, performance increase with size increase
     - Provisioned IOPS SSD(io1 & io2)
         - Also backed by ssd, highest performance EBS, for critical high throughput , intensive workloads.Like DB etc.
-        - <img width="1421" alt="Screenshot 2023-12-28 at 11 08 38 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f2ec5a08-e391-4889-844b-e77fce4a2888">
+        <img width="1421" alt="Screenshot 2023-12-28 at 11 08 38 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f2ec5a08-e391-4889-844b-e77fce4a2888">
         - io2 & io1 mostly similar, io2 more durable but io2 block express better.
     - Thoughput - Optimized HDD(st1) and Cold HDD volumes(sc1)
         - Based on HDD
-        - <img width="1397" alt="Screenshot 2023-12-28 at 11 13 10 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/504d3ab8-ac8c-4600-9788-24c22aca1ff3">
+        <img width="1397" alt="Screenshot 2023-12-28 at 11 13 10 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/504d3ab8-ac8c-4600-9788-24c22aca1ff3">
         - st1 : Big Data ,warehouse,log processing
         - sc1 : cheapest one,data infrequent access.
     - Magnetic Volume(previous generation)
         - Depend on magnetic drive
-        - <img width="1217" alt="Screenshot 2023-12-28 at 11 27 13 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/5a29cb64-aea7-4b31-bfae-f74cdacadbde">
+        <img width="1217" alt="Screenshot 2023-12-28 at 11 27 13 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/5a29cb64-aea7-4b31-bfae-f74cdacadbde">
 
     - price per GB per month,faster iops  Cost
 - lsblk command in ec2's terminal to check all blocks listed.linux /dev/(xvdf etc naming) usual path of block access.
@@ -413,7 +416,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Can mount on multiple EC2
 - VPC specific deploy, specify subnets to get mount target which are an ip adress
 - Now ec2 instance can connect using this mount ip.
-- <img width="1325" alt="Screenshot 2023-12-28 at 5 06 39 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d3f2dce6-bed1-4748-a36c-c7917169c97d">
+    <img width="1325" alt="Screenshot 2023-12-28 at 5 06 39 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d3f2dce6-bed1-4748-a36c-c7917169c97d">
 - Different types
     - Standard Storage Classes
         - EFS Standard
@@ -421,11 +424,14 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - One Zone Storage Classes
         - EFS One Zone
         - EFS One Zone-Infrequesnt Access(EFS One Zone-IA)
+        
         ![Screenshot 2023-12-29 at 6 49 03 AM](https://github.com/MadSn7/My_Learning/assets/62552772/abac8f0c-3add-4fe1-9707-85bddbb45e74)
 - Various Modes
     - General purpose perforamnce mode
     - Elastic Throughput mode
-      ![Screenshot 2023-12-29 at 6 50 10 AM](https://github.com/MadSn7/My_Learning/assets/62552772/d7da403a-7019-47f3-a89c-93e99e062e3b)
+      
+    ![Screenshot 2023-12-29 at 6 50 10 AM](https://github.com/MadSn7/My_Learning/assets/62552772/d7da403a-7019-47f3-a89c-93e99e062e3b)
+    
     ![Screenshot 2023-12-29 at 6 50 17 AM](https://github.com/MadSn7/My_Learning/assets/62552772/332f620a-498f-4458-b5bd-65497e6cef81)
 
 
@@ -445,7 +451,153 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - EFS works only with linux, fsx works with windows os as well including others.
 - Also allows shared access like efs.
 - Different types
-  ![Screenshot 2023-12-29 at 7 10 24 AM](https://github.com/MadSn7/My_Learning/assets/62552772/2b02f764-9f58-4b95-a675-27ff52d3ff9d)
 
+    ![Screenshot 2023-12-29 at 7 10 24 AM](https://github.com/MadSn7/My_Learning/assets/62552772/2b02f764-9f58-4b95-a675-27ff52d3ff9d)
+
+### S3(Simple Storage Service)
+- Object based storage service, basically a place to save and drop files.Due to being in AWS will integrate well with other aws services.
+- Object Based Storage is different from nfs based storage, can't used as block based as well.Great for log files, media,static sites, ci/cd artifacts and many more usage.
+- Media websites like netflix etc, storing files in all servers is problamatic, not feasible, we can store media files in S3.Server will just have your logic/applications and can give that S3 links for downloading content from there.
+- Files in S3 are stored in bucket say a Folder, can have as many buckets you want, or can jsut have different folders inside a bucket.
+- Inside buckets there are objects, every file you upload is an object.
+- Object has
+    - Key : The File Name
+    - Value : File Data
+    - Version/Metadata/Other info(can enable/add)
+- Has flat file structure, it looks like it has folders but /music/song1 is not a folder but s3 stores it as flat so /music/song1 is name of object.
+- S3 replicate object in same azs as well as several azs to be resilent and available.
+- S3 bucket name is unique for all aws account, so no two s3 bucket with same name not possible.(Cause s3 has links given to access object, and this should be unique)
+- S3 can handle indifinite number of files.
+- Size of one file can be max upto 5TB(Multi part upload allows you to brak up an object into parts before uploading)
+- An aws account can have 100 S3 buckets, but can increase to 1000 after requests.
+- By default public access disabled, we choose region for S3 but S3 is global service.
+- Can't delete non empty buckets.
+
+#### S3 - Storage Classes
+- Offers varies level of storage classes, based on data access, resiliency and cost.Various types are :
+    - S3 Standard
+        - Object are replicated to 3 azs
+        - 11 9s worth of reliability.
+        - Cost per gb/per month
+        - Low latency, can make file public.
+        - No charge for upload data,egress cost per gb.
+    - S3 Standard - IA
+        - Same 3 AZs and 11 9
+        - cost per gb per month , but will be cheap, low latency, can make public.
+        - Has a retrieval fee for everytime access
+        - Good for very less accessed data.
+        - Min size charge 128kb
+    - S3 One Zone-IA
+        - Object not replicated in different azs so cheaper than above ones.
+        - Low latency, charge on egress, same as S3 standard- IA.
+    - S3 Glacier-Instant
+        - Low Cost options for rarly accessed data
+        - Still quick retrieval
+        - Stored accross azs, 11 9s
+        - Per gb per month cost, high retrieval cost, 90 days duration.
+    - S3 Glacier Flexible
+        - Objects not immediately availble.Cold start.Can't be publicly accessible.
+        - Per gb per month, per gb egress charge, retrieval fee depends upon how quickly you want data.
+            - bulk : 5-12 Hours
+            - Standard : 3-5 Hours
+            - Expedited: 1-5 Minutes
+    - S3 Glacier Deep Archive
+        - Lowest cost, not immeditely accessible same as above one.
+        - Duration 180 days, 40 kb per object min size
+        - Options are standard 12 hours, Bulk 48 hours.
+    - S3 Intelligent Tier
+        - Automatically reduces storage costs by intelligently moving data.
+        - Per 1000 object monitoring/ moving charges
+        - Not sure and have mix of data use this.
+- Under propeties can change storage types for each object, and can change it later as well.
+- You can configure S3 storage classes at the object level, and a single bucket can contain objects stored across S3 Standard, S3 Intelligent-Tiering, S3 Standard-IA, and S3 One Zone-IA. You can also use S3 Lifecycle policies to automatically transition objects between storage classes without any application changes.
+`chart of storage classes`
+
+#### S3 - Versioning
+- Without versioning, if we delte file no way to bring it back,also can't upload new file with same name to update file, it will delte old same name object if we have same name.
+- To get older version, have some backup availble versioning is created.
+- Versioning is applied on S3 bucket itself not any particular object.
+- S3 bucket can be Unversioned, Version Enabled and Versioning Suspend.Versioning suspend is different from removing it.
+- Versioning works whenever you upload an object a version id is attached with it, so if new object same name is uploaded it will have another version.(v1 -> v2 - ...)
+- Latest/curent version user will see/get.
+- When you delete an object a delete marker is added , hiding the ibject but still present, you can delete detlete marker to bring it back.
+- Can permanently delete particular version of an object.
+- Pricing : All version stored is charged.
+- when you diable versioning, all objects version already there stays, but ned objects will have verwsion id NULL, have to maual delete all versioned objects.
+- MFA Delete : Enable MFA to change versioning state as well as deleted older version objects.
+
+#### S3 - ACL and Resources Policies
+- By default user that created S3 and root user has access to S3, so no other user as well as no public.
+- S3 bucket policy (resource policy) to change access.It's written in JSON, basic eg
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "AllowGetObject",
+        "Principal": {
+            "AWS": "*" // meaning apply to all, public,aws account, registered, not registered
+        },
+        "Effect": "Allow",
+        "Action": "s3:GetObject",
+        "Resource": "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*",
+        "Condition": {
+            "StringEquals": {
+                "aws:PrincipalOrgID": ["o-aa111bb222"]
+            }
+        }
+    }]
+}
+```
+- Can allow to access at particular folder object as well, or allow access from particular range of ip.
+- IAM policy is for user, cannot be applied to anonymous user whereas a resource's policy is for a resource can include public etc rules/access.But they work together, so we need a allow from both.(For public only bucket policy works)
+- ACLs are predated legacy access control that predates IAM , not reco to use, cause they only allow some fixed policy.
+`image here for acl`
+
+#### S3 Static Webiste Hosting
+- We can store html,css, js, media etc in S3 bucket, now we can use it as hosting.
+- Along with data stored etc, per http request also has cost, pretty lower.We will get a url, can hit the url to access site.
+- Can set Route53 to get fixed domain, but need to name s3 bucket same as domain name.
+- Need to have public access for s3.
+
+#### S3 Pres-Signed URLs
+- We have a private S3 bucket and an IAM user have access to S3, now someone not registered need to have access to a file/files.Now we don't want to make it public, and not want to make user aws.
+- You can create pre-signed url and give to public user, now public user can access the bucket then, and other users can't access S3 as S3 is still private.Not only get, we can post as well etc.
+- Check object actions for creating pre-signed url, need to set expiration time for it.
+
+#### S3 - Access Points
+- Different users should have diferent access to s3 and it's objects, and bucket policy can become very complicated if we follow that.
+- We can create separate access points, separate ARN so each user can have their view of S3, we can attach policy per access points.
+`2 images for access points`
+
+### AWS Backup
+`image covering diff `
+-  Lots of service are present for disaster recovery
+- S3 is great for storing backup data,EBS as well, you can take snapshot of your data, on your scheduling.
+- AWS Backup is a service is unified console for managing AWS service, automates backup scheduling etc.Can access different regions and different accounts.
+- Components
+    - Backup Vault : Container that stores your backup data, can have in various regions as well.
+    - BackUp Plan : Configs for back up, scheduling etc.
+    - Recovery Point : A point in time upto where you want to backup.
+`image for aw backup across regions`
+- There are lot of service we can intergrate aws backup with ec2, rds, ebs etc, can monitor using eventbridge, cloudwatch, sns, cloudtrails etc. 
+
+### Elastic Disaster Recovery
+- Fully managed disaster recovery service for both physical, virtual and cloud.
+- Utilise AWS as recovery site, so we don't have to pay anything until we use it.
+- Easy to access with a disaster recovery infra.
+- Can handle failover from on prem to aws, other cloud(gcp, azure) to aws,one aws region to another.
+- Need to mention source servers, represent data we want to replicate.
+- Staging area, where aws recieves the replicated data.
+- Launch template used to coonfigure the specifications of recovery servers(size, regions, sg's etc)
+
+### Storage Gateway
+- Allows on prem to storage in cloud.
+- Can act as backup for storage, assist migration to cloud,can help in disaster.
+- It is either a virtual machine, or a physical machine in on prem env.
+- If storage on prem is done on volume, can have volume mode or if file can have file mode.
+- Storage gateway - Volume
+    - Cached Mode
+    - Stored Mode
+- Check again in revision?!
 
 
