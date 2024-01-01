@@ -1,4 +1,4 @@
-# AWS SAA
+![Screenshot 2023-12-30 at 3 06 03 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c402ebeb-71ba-4736-b922-b0460a98f099)# AWS SAA
 
 ## Introduction
 ### Why take this course
@@ -615,7 +615,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Earlier used to manual, buy setup deploy maintain a server, now you can use this aws ec2 service.
 - An instance is a virtual host, with some properties and configurations.
 - EC2 Instance Types
-`ec2 types image`
+![Screenshot 2023-12-30 at 2 57 51 PM](https://github.com/MadSn7/My_Learning/assets/62552772/227cb0d5-f418-4c2a-a950-b2f3395c4758)
 
 - EC2 AMI(Amazon Machine Image)(Like Blueprints)
     - When you have a server need to have some OS, so AMI is there for that, it is provided for nearly every main os and you can choose that.
@@ -630,7 +630,8 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - When we deploy EC2 instance, we usually use SSH to connect to EC2 instance, and we create a public-private key for security.
 - EC2 instance will have public key and you will have private key which needs to be used to do ssh.
 - EC2 instance Lifecycle
-`image`
+![Screenshot 2023-12-30 at 3 06 03 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c7ed4300-6734-463e-a969-4209ae2f0e19)
+
 - You can pass some shell scripts while deploying ec2 at start to install imp files, or some other stuffs need to be done at startup, any instruction.
 - Need sg configured when deploying EC2,if web server need to allow http/https etc.
 - To save data somewhere persistent
@@ -646,10 +647,11 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - Partition Placement : So one partition is away from another one, good for hadoop like distributed workloads.
     - Spread Palcememnt Group: Each Separate across machines.
 
-    `image fro placement ec2`
-- Pricing
+    ![Screenshot 2023-12-30 at 3 16 37 PM](https://github.com/MadSn7/My_Learning/assets/62552772/b3b2c926-0906-4b02-97b3-2f47f8ce51b2)
 
-    `image for purchasing oprions`
+- Pricing
+    ![Screenshot 2023-12-30 at 3 17 47 PM](https://github.com/MadSn7/My_Learning/assets/62552772/b70a6950-b674-4688-9e01-d8efe8fcd904)
+
     - On demand : Buying at regular price, not sure when you will need it, pay for your usage, no cost after you shut and delete it off
     - Spot Instance : Buying at cheaper cost, on unused EC2 types.It is irregular.Cost savings, but interruptions.
     - Savings Plan : Commiting on particular EC2 type, but you will use that consistantly, good for consistent usage.
@@ -665,17 +667,15 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Allows to customize images for yourself which can be used to deploy other servies.
 - Have version manage,ent as well so can roll back to previous images.
 - Process
-    
-    `process image`
-
+  ![Screenshot 2023-12-31 at 10 28 07 AM](https://github.com/MadSn7/My_Learning/assets/62552772/2138c294-602b-4a4d-9f94-ea9e5180a7ab)
 
 ### Elastic Network Interfaces(ENIs)
 - Can think of taking network configs separate from EC2 instance and using this for that.
 - It's present inside the azs, contains things like ip4/6 ip mac address etc.Definitely can assign several ENI to ec2 not sure of vice versa
 - A primary ENI is attached to EC2 when it is created an cannot be deleted, automatically gone when instance is terminated, if ec2 has public access primary/default ENI will have 
 public ip attached to it.
+![Screenshot 2023-12-31 at 10 34 12 AM](https://github.com/MadSn7/My_Learning/assets/62552772/682c5d9a-586a-4ddf-9f10-b23ce1632a5f)
 
-    `primary and secodnay ENI images`
 - Elastic ip can be attached to the ENI.One or more sgs can be attached to ENI.
 - Logs can be there for it as well.
 
@@ -694,8 +694,8 @@ public ip attached to it.
 - Can use container image as well.
 - Can easy trasition to EC2 platform, if and when you want
 - Process
+![Screenshot 2023-12-31 at 11 00 39 AM](https://github.com/MadSn7/My_Learning/assets/62552772/c1ba441e-c003-4f41-a47a-5b923e63845d)
 
-`imahe of process lightsail`
 
 ### ECS(Elastic Container Service)
 - Should have some knowledge of containers, images etc.
@@ -713,7 +713,8 @@ public ip attached to it.
     - EC2 : We have to manage underlying EC2 instance.We have to configure docker, ECS agent, firewall, pathces etc.Full control of infra.
     - Fargate : Aws manages underlying infrastructure too, serverless architecture.
     Will create servers on demand according to application need for run and demand.Pay for what you use.
-    `difference images`
+    ![Screenshot 2023-12-31 at 1 44 51 PM](https://github.com/MadSn7/My_Learning/assets/62552772/276d4446-973d-47cd-95e0-1f6568f744ee)
+
 #### ECS Task
 - We have image now we want to run with configs like cpu memory, image name, other configs.
 - Task Definition is created for that(a blueprint), we tell various info like above and ports, volumes etc.
@@ -740,7 +741,11 @@ Similar to docker compose.
     - Managed Node Group
     - Fargate: similar to ECS,create worker nodes on demand.No need to maintain EC2 server.
     `3 images`
+    <img width="1005" alt="Screenshot 2023-12-31 at 7 04 16 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/93ef80f1-4ca6-4c25-b192-3ff9d615b957">
+    <img width="1013" alt="Screenshot 2023-12-31 at 7 03 40 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/3e7cd1de-e1b4-4f38-8789-f14656348395">
+
 - Process for creating EKS cluster
+<img width="989" alt="Screenshot 2023-12-31 at 7 05 34 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b1b039ef-915c-4055-94fd-1e8ac99ccd83">
 
 - `creating eks cluster nodes process`
 - worker nodes depend upon mode you choose.
@@ -761,7 +766,8 @@ Similar to docker compose.
 - Helps with batch jobs/operations.
 - We just give info of our jobs, we can also queue and prioritize the jobs.
 - Batch Components
-`batch component image`
+<img width="1003" alt="Screenshot 2023-12-31 at 7 25 11 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/04f176da-336f-4df2-bcb4-d9596d689041">
+
 
 ### AWS Lambda
 - Serverless event driven service, just take your code set some event to start, aws will take care of the rest, it will scale up or down accordingly.
@@ -779,7 +785,8 @@ Similar to docker compose.
 - The AWS Serverless Application Model (AWS SAM) is an open-source framework for building serverless applications. It provides shorthand syntax to express functions, APIs, databases, and event source mappings.
 - It has cli with it as well.
 - think of it as an extension of cloudformation on serverless side.
- `image basic flow serverless`
+ <img width="898" alt="Screenshot 2024-01-01 at 8 12 10 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b8a3d9ec-fd70-4b94-971b-714925fe80b7">
+
 
 #### Serverless Application Repository
 - You can publish your serverless package here to share with others and public, like open source for serverless application.integration with SAM.
