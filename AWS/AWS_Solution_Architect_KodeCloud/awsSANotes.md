@@ -367,28 +367,26 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Block Storage : It breaks data in blocks and stores them with unique identifer.A collection of this blocks can be attached to show as volume and OS can create File System onto it, as well as hard Drive on it so as to install OS/boot it
 - So it is both mountable and bootable
 - In AWS block storage is EBS service, provides block level storage volumes for your ec2 instances.
-- As they are seaprate from EC2, we can move data from one EC2 to other too.Tradionally one block is attached to one EC2 but now you can attach to more but make sure all don't overwrite each other's data.
+- As they are seaprate from EC2, we can move data from one EC2 to other too.Tradtionally one block is attached to one EC2 but now you can attach to more but make sure all don't overwrite each other's data.
 - Available within AZ's, both EC2 and EBS should be in same az, can't if in another az.
 - Basically create EBS storage and during creating EC2 attach that created storage.
 - To migrate data between az, we can take snapshots, which get stored in S3,now we can deploy EBS in another AZ, similar step for cross regions too.
-
-    <img width="1405" alt="Screenshot 2023-12-28 at 10 34 16 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/a948c244-d71c-4726-a89f-7fa852835a1a">
+<img width="1405" alt="Screenshot 2023-12-28 at 10 34 16 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/a948c244-d71c-4726-a89f-7fa852835a1a">
 
 - EBS volume types
-    
     <img width="1411" alt="Screenshot 2023-12-28 at 10 35 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/ca013ed9-613b-4e5e-8d71-4eb09162fb37">
     
     - General-Purpose SSD(gp2 & gp3)
         - Volume backed by solid state drives(ssd)
-        - Balance price and perforamance
+        - Balanced price and perforamance
         - Recommended for most workloads, if not sure use this.
-        - gp3 are latest generations and lowest cost,good for most application, 20% cheap than gp3
+        - gp3 are latest generations and lowest cost,good for most application, 20% cheap than gp2
         - gp2 are default EBS volume, performance increase with size increase
     - Provisioned IOPS SSD(io1 & io2)
         - Also backed by ssd, highest performance EBS, for critical high throughput , intensive workloads.Like DB etc.
         <img width="1421" alt="Screenshot 2023-12-28 at 11 08 38 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f2ec5a08-e391-4889-844b-e77fce4a2888">
-        - io2 & io1 mostly similar, io2 more durable but io2 block express better.
-    - Thoughput - Optimized HDD(st1) and Cold HDD volumes(sc1)
+        - io2 & io1 mostly similar, io2 more durable and io2 block express better.
+    - Throughput - Optimized HDD(st1) and Cold HDD volumes(sc1)
         - Based on HDD
         <img width="1397" alt="Screenshot 2023-12-28 at 11 13 10 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/504d3ab8-ac8c-4600-9788-24c22aca1ff3">
         - st1 : Big Data ,warehouse,log processing
@@ -411,7 +409,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 - Not availble with free tiers instances like t2 micro etc.
 
 ### EFS
-- First of two files sytsem sotrage provides(other is FSx)
+- First of two files system storage service of aws(other is FSx)
 - Uses NFS (NFSv4) file system, windows doesn't work with it, only linux.
 - Can mount on multiple EC2
 - VPC specific deploy, specify subnets to get mount target which are an ip adress
@@ -456,9 +454,9 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 
 ### S3(Simple Storage Service)
 - Object based storage service, basically a place to save and drop files.Due to being in AWS will integrate well with other aws services.
-- Object Based Storage is different from nfs based storage, can't used as block based as well.Great for log files, media,static sites, ci/cd artifacts and many more usage.
-- Media websites like netflix etc, storing files in all servers is problamatic, not feasible, we can store media files in S3.Server will just have your logic/applications and can give that S3 links for downloading content from there.
-- Files in S3 are stored in bucket say a Folder, can have as many buckets you want, or can jsut have different folders inside a bucket.
+- Object Based Storage is different from nfs based storage, can't be used as block based as well.Great for log files, media,static sites, ci/cd artifacts and many more usage.
+- Media websites like netflix etc, storing files in all servers is problematic, not feasible, we can store media files in S3.Server will just have your logic/applications and can give that S3 links for downloading content from there.
+- Files in S3 are stored in bucket say a Folder, can have as many buckets you want, or can just have different folders inside a bucket.
 - Inside buckets there are objects, every file you upload is an object.
 - Object has
     - Key : The File Name
@@ -504,7 +502,7 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - S3 Glacier Deep Archive
         - Lowest cost, not immeditely accessible same as above one.
         - Duration 180 days, 40 kb per object min size
-        - Options are standard 12 hours, Bulk 48 hours.
+        - Options for retrieval are standard 12 hours, Bulk 48 hours.
     - S3 Intelligent Tier
         - Automatically reduces storage costs by intelligently moving data.
         - Per 1000 object monitoring/ moving charges
@@ -515,16 +513,16 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 
 
 #### S3 - Versioning
-- Without versioning, if we delte file no way to bring it back,also can't upload new file with same name to update file, it will delte old same name object if we have same name.
-- To get older version, have some backup availble versioning is created.
+- Without versioning, if we delete file no way to bring it back,also can't upload new file with same name to update file, it will delete old same name object if we have same name.
+- To get older version, have some backup available versioning is created.
 - Versioning is applied on S3 bucket itself not any particular object.
 - S3 bucket can be Unversioned, Version Enabled and Versioning Suspend.Versioning suspend is different from removing it.
 - Versioning works whenever you upload an object a version id is attached with it, so if new object same name is uploaded it will have another version.(v1 -> v2 - ...)
-- Latest/curent version user will see/get.
-- When you delete an object a delete marker is added , hiding the ibject but still present, you can delete detlete marker to bring it back.
+- Latest/current version user will see/get.
+- When you delete an object a delete marker is added , hiding the object but still present, you can delete detlete marker to bring it back.
 - Can permanently delete particular version of an object.
 - Pricing : All version stored is charged.
-- when you diable versioning, all objects version already there stays, but ned objects will have verwsion id NULL, have to maual delete all versioned objects.
+- when you disable versioning, all objects version already there stays, but new objects will have version id NULL, have to manually delete all versioned objects.
 - MFA Delete : Enable MFA to change versioning state as well as deleted older version objects.
 
 #### S3 - ACL and Resources Policies
@@ -604,6 +602,209 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
     - Cached Mode
     - Stored Mode
   
-`Check again in revision?!`
+`Check again in revision storage gateway maybe backups too?!`
+
+>Quiz Storage
+
+> 21/26 == 81% Correct
+
+## Services - Compute
+
+### EC2(Elastic Compute Cloud)
+- A place where your applications runs is server, EC2 is similar service for that server.
+- Earlier used to manual, buy setup deploy maintain a server, now you can use this aws ec2 service.
+- An instance is a virtual host, with some properties and configurations.
+- EC2 Instance Types
+`ec2 types image`
+
+- EC2 AMI(Amazon Machine Image)(Like Blueprints)
+    - When you have a server need to have some OS, so AMI is there for that, it is provided for nearly every main os and you can choose that.
+    - We can customize the ami too, and deploy our ec2 with that properties.
+    - Types
+        - Public : From amazon and various other places.
+        - Private : In particular account/organisations.
+        - Shared : Private AMI can be shared according to your need.
+    - Can create any no of instances from a AMI.
+    - You can have an EC2 instance configure various things in it and then create AMI from it as well to be used for deploying other servers.
+
+- When we deploy EC2 instance, we usually use SSH to connect to EC2 instance, and we create a public-private key for security.
+- EC2 instance will have public key and you will have private key which needs to be used to do ssh.
+- EC2 instance Lifecycle
+`image`
+- You can pass some shell scripts while deploying ec2 at start to install imp files, or some other stuffs need to be done at startup, any instruction.
+- Need sg configured when deploying EC2,if web server need to allow http/https etc.
+- To save data somewhere persistent
+    - Use EBS
+- Can integrate various servers with Elastic Load Balancer(ELB)
+- Autoscaling Groups
+    - Can autoscale up down no of instaces to handle the demand.
+- Can assign Elastic IP to an EC2, so as to have permanent public ip.
+- EC2 launch template
+    - Configs to deploy EC2 instance with several info, usually attached with autoscale group, so it will deploy accordingly.
+- If you deploy EC2 it will be setup at random machine in your azs but you can give some info for better setups
+    - Cluster Placement : As close to one another, good for low latency, high throughput.
+    - Partition Placement : So one partition is away from another one, good for hadoop like distributed workloads.
+    - Spread Palcememnt Group: Each Separate across machines.
+
+    `image fro placement ec2`
+- Pricing
+
+    `image for purchasing oprions`
+    - On demand : Buying at regular price, not sure when you will need it, pay for your usage, no cost after you shut and delete it off
+    - Spot Instance : Buying at cheaper cost, on unused EC2 types.It is irregular.Cost savings, but interruptions.
+    - Savings Plan : Commiting on particular EC2 type, but you will use that consistantly, good for consistent usage.
+    - Reserved Instances : buying a monthly yearly plan, so discounts.Different from saving is saving you have spend some fixed amount atleast per month, reserved is certain amount of compute.
+    - Dedicated host : No one can use this host, for your usage only.Whenever you deploy EC2 is on that host.Save cost on license costing.
+    - Dedicated Instance : Get a dedicated server for you EC2, your host can change, physically.Guaranteed to have host but not same.
+- Instance type is different type of ram, rom size, etc.
+```
+ ssh -i "pemFile" ec2-user@instanceIP
+```
+
+#### EC2 Image Builder
+- Allows to customize images for yourself which can be used to deploy other servies.
+- Have version manage,ent as well so can roll back to previous images.
+- Process
+    
+    `process image`
+
+
+### Elastic Network Interfaces(ENIs)
+- Can think of taking network configs separate from EC2 instance and using this for that.
+- It's present inside the azs, contains things like ip4/6 ip mac address etc.Definitely can assign several ENI to ec2 not sure of vice versa
+- A primary ENI is attached to EC2 when it is created an cannot be deleted, automatically gone when instance is terminated, if ec2 has public access primary/default ENI will have 
+public ip attached to it.
+
+    `primary and secodnay ENI images`
+- Elastic ip can be attached to the ENI.One or more sgs can be attached to ENI.
+- Logs can be there for it as well.
+
+
+### Elastic Beanstalk
+- We need several services to deploy an application over to aws, can be challenging for you if we want to deploy a simple applications.
+- It was created to do this simply and in background AWS will deploy several things for you.(vpc,sg,storage,netwrking etc)
+- Support nearly all major runtime like java, python, docker,node etc.
+- There is an environment to be created(contains several configs like lbs, sgs, ami, and several things) and this can be deployed then.Can upgrade evironmnet and updating it.
+- We can see all ec2, sgs etc that was created when we create elastic beanstalk.We get a dns/ip to check our running applcation.
+- You get managed updates, load balancer and autoscaling, monitoring with cloudwatch etc.
+
+### LightSail
+- Quickest and Easiest way to get you project up and running.Don't have all features but enough for most of the applications.
+- It is virtual server provider with built in firewall, containers, lbs, managed dbs, global content delivery.
+- Can use container image as well.
+- Can easy trasition to EC2 platform, if and when you want
+- Process
+
+`imahe of process lightsail`
+
+### ECS(Elastic Container Service)
+- Should have some knowledge of containers, images etc.
+-Container Challenges
+    - Need several host
+    - Need Monitoring
+    - Need Load balancing
+    - To be able to scale up or down accordingly
+- Container Orchestration solve this issue.ECS is aws's container orchestrator.
+- Containers runs on Either EC2 instances o Fargate.
+- ECS is the brain, we need to provide compute like EC2 or fargate.
+- If we use ECS is not provided to other cloud providers so maybe difficult to transfer(EKS is there which is K8s version for cloud, easy for on prem to cloud or another cloud provider)
+- Other are difficult to work with, ECS is simpler to start.
+- Launch Types(Where our infra/cluster is placed)
+    - EC2 : We have to manage underlying EC2 instance.We have to configure docker, ECS agent, firewall, pathces etc.Full control of infra.
+    - Fargate : Aws manages underlying infrastructure too, serverless architecture.
+    Will create servers on demand according to application need for run and demand.Pay for what you use.
+    `difference images`
+#### ECS Task
+- We have image now we want to run with configs like cpu memory, image name, other configs.
+- Task Definition is created for that(a blueprint), we tell various info like above and ports, volumes etc.
+Similar to docker compose.
+- We can create a task(aka containers) from task definition(configs file).
+
+#### ECS Services
+- We create a service in ECS.Makes sure a certain no of tasks are running at all times.
+- Responsible for creating tasks from task definition.
+- We mention how many task we want for particular task def.
+- In case of fail it will restart etc.Can think of ot as manager of tasks.
+- We can create a frontend , backend, db service eg and mention each service how many task you want.
+- Load Balancer : We can deploy usual Load Balancer, attach to ECS, it will make sure to load balance according to current tasks and future task as well.We attach it to our service.
+(Optional but should create it for good usage)
+- For every task we have sepoarate ip, and each new deploy ip changes, so Load balancer resolves that.
+
+### EKS
+- AWS's managed kubernetes service.
+- EKS creates master nodes, control plane etc, so aws helps in managing it.
+- Worker nodes is still you responsibility.
+- We get integration with other aws services as well.
+- For handling Worker nodes 3 options
+    - Self Managed Nodes : 
+    - Managed Node Group
+    - Fargate: similar to ECS,create worker nodes on demand.No need to maintain EC2 server.
+    `3 images`
+- Process for creating EKS cluster
+
+- `creating eks cluster nodes process`
+- worker nodes depend upon mode you choose.
+- Then connedct worker node to your k8s cluster
+
+### ECR(Elastic Container registery)
+- To store the docker images, palce to put and get the docker image.
+- ECS, EKS, On Prem can pull image from here, make sure they are authenticated.
+- Two types : Public, Private.
+
+### App Runner
+- Service to have easily setup run of your code, so you just have to push your code.
+- Also setup ci/cd pipeline, so push any git platform, when merged into master it will trigger build accordingly.(Setup codcommit codebuild in github)
+- App Runner will provide http ip, so as to access your application.
+- automatic deploy, after code is pushed.Compitable with codecommit ,ECR.
+
+### Batch
+- Helps with batch jobs/operations.
+- We just give info of our jobs, we can also queue and prioritize the jobs.
+- Batch Components
+`batch component image`
+
+### AWS Lambda
+- Serverless event driven service, just take your code set some event to start, aws will take care of the rest, it will scale up or down accordingly.
+- Lot of triggers and integrations, liek api gateway, s3 event notification etc.
+- no server load, many runtime configs available.
+- We can upload function and it's dependecy in zip file to run, and we can also add layer to lambda function which contains all libs and configs to make our lambda function run, layer can also be shared to other lambda functions
+- Logs is set up default in cloudwatch.
+
+### Step Functions
+- Contains state machine, which is basically the flow of your workflow/logics/actions.Baically a flow chart.
+- When you create a stateflow aws provided various types of workflow template so don't have to start from scratch.
+- Contains integration with varioujs aws services like lambda, ecs, sns etc.
+
+### Serverless Application Model
+- The AWS Serverless Application Model (AWS SAM) is an open-source framework for building serverless applications. It provides shorthand syntax to express functions, APIs, databases, and event source mappings.
+- It has cli with it as well.
+- think of it as an extension of cloudformation on serverless side.
+ `image basic flow serverless`
+
+#### Serverless Application Repository
+- You can publish your serverless package here to share with others and public, like open source for serverless application.integration with SAM.
+
+### Amplify
+- Service for mobile and webApp development.
+- Abstract a lot of service, so you focus only on code.It has amplify studio, also has pre build react components.
+
+### OutPosts
+- If we can some on prem infra and want to be handled same way as aws, so as to compitable with on cloud infra.Truly hybrid.
+- AWS will physically attach device to your on prem data center and then you can run aws services in your on prem servers.Same way as in cloud.
+- We will have vpn or direct connect with on prem and cloud, feel like just two different accounts.
+
+### ECS/EKS Anywhere
+- What if we want to have EKS/ECS in your own data center/On Prem?
+
+### VMware Cloud on AWS
+- VMware is used to create VMs on your server.Virtulisation.
+- So on prem has vms, and cloud has ec2 can be cumbersome.
+- So you can make all run on vmware, can move vms to on  prem to cloud and vice versa.Can perform disaster recovery easily as both are similar.
+
+### SnowCone(PArt of snow family of products)
+- This one has compute power, rest snow familty is sotrage,data etc.
+- Physically move data in/out of aws.They are also good for in extreme climate conditions.You can perform your operations and shift your data.Can run edge computing.
+
+
 
 
