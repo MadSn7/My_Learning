@@ -1,4 +1,4 @@
-![Screenshot 2023-12-30 at 3 06 03 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c402ebeb-71ba-4736-b922-b0460a98f099)# AWS SAA
+<img width="1003" alt="Screenshot 2024-01-01 at 12 37 41 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/af0c6ed2-9898-454d-86f2-023a6fc58f64">![Screenshot 2023-12-30 at 3 06 03 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c402ebeb-71ba-4736-b922-b0460a98f099)# AWS SAA
 
 ## Introduction
 ### Why take this course
@@ -816,7 +816,7 @@ Similar to docker compose.
 > 21/26 == 81% Correct
 
 ## Services - Database
-`aws database images`
+<img width="973" alt="Screenshot 2024-01-01 at 12 20 33 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/df04d098-1f4b-4e3f-aaa8-a48d6ae93049">
 ### AWS-RDS(Relational DB Service)
 - When we have our own db, we need to do several tasks ourselves and keep db administrator for it.
 - RDS is managed,scalable solution for running relational db in aws.RDS will manage security, durability etc according to your instruction.
@@ -827,16 +827,18 @@ Similar to docker compose.
 - Different Instance Types
     - Single AZs : data will be lost, if az goes down.Good for staging and dev environment.
     - Multi AZ-Instance : Automatic backup in other az,secure.
-    `imnage here`
-    - Read Replicas : Basically load balance read operations to various place, data is copied to two instance, write is in only one.read from either.`image here`
+    <img width="975" alt="Screenshot 2024-01-01 at 12 31 15 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/abf202a5-10b3-4969-85f6-2ddb0a653149">
+    - Read Replicas : Basically load balance read operations to various place, data is copied to two instance, write is in only one.read from either.
+    <img width="965" alt="Screenshot 2024-01-01 at 12 32 41 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6f4b0578-1128-4c2a-b817-f45a68735677">
         - at least for read it is active-active both instances.
         - during dissater recovery, read replica can be made standlaone db.
     - Multi-AZ Cluster
         - have data in other regions
-        `image here`
+        <img width="1003" alt="Screenshot 2024-01-01 at 12 37 41 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/9d75d27e-a63c-43c7-b6d8-6c164b9600b3">
+
     - Blue-Green Deployment
         - Two alternate DBs Cluster can make another Db main after checking the updates etc.
-        `image`
+        <img width="927" alt="Screenshot 2024-01-01 at 12 38 43 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b5a0f18f-7073-4dbf-8570-4786e12e60a2">
 - Multi AZs have additional cost,rds manages data consistency across instances,multi az have read in other azs too.
 - Storage types, general purpose, IOPS SSD(Best for production), magnetic(old, redundant).
 - RDS Configuration/Features
@@ -849,18 +851,18 @@ Similar to docker compose.
 - Designed to perform low cost high performance.
 - Full combatibility with mysql,postgresql.5x throughput mysql, 3x postgressql.
 - Traditional DB when have high data, gets troubled in update, copying data etc.
-- So compute and storage decoupled is best fro scalibility, availabolity, durability.
-`why rds image/architecture`
+- So compute and storage decoupled is best fro scalibility, availability, durability.
+![Screenshot 2024-01-01 at 1 51 46 PM](https://github.com/MadSn7/My_Learning/assets/62552772/7a1474e8-339c-4b34-a99a-131f73c356b0)
 - Several qualities, size copy of data across azs.
 
-`another image of aurora`
+![Screenshot 2024-01-01 at 1 53 30 PM](https://github.com/MadSn7/My_Learning/assets/62552772/69d0d9f1-d163-42d3-95e6-6eee5fbcc130)
 
 - Two Types
     - Provisioned : pre configured capacity, scale up is manual, is aurora global
     - Serverless : on demand scaling, useful for variable and unpredictable workload, aurora globa v2 only
         - Aurora global meaning on primary db cluster and upto 5 different read cluster in different aws regions.
  - Measure quantiry ACU(Aurora capacity unit), 1 unit = 2GB.Min to take is 0.5
- `aurora v1 and v2,`
+ ![Screenshot 2024-01-01 at 2 00 45 PM](https://github.com/MadSn7/My_Learning/assets/62552772/b1942412-6490-4fd3-a7dd-b3ade4ba3189)
  - v2 is now used mainly.
  - Have integraton with various aws services like s3, lambda, cloudwatch, redshift, etc.
 
@@ -868,13 +870,13 @@ Similar to docker compose.
  - Aplications will open a number of connections to RDS, and if you have many instances/ servers running requiring connection to rds, there will be lot of connections.
  - RDS proxy will have a pool of connections and applications will hit rds proxy for query and rds proxy will reuse those connections for query.
  - RDS proxy is fully managed, fully compatiable with various engines of rds.Application can be on ec2, ecs,eks, lambda.
+![Screenshot 2024-01-02 at 7 05 25 AM](https://github.com/MadSn7/My_Learning/assets/62552772/cf0d2fe3-5b30-4def-89ee-3acfdd514589)
 
->>>>>>>> why need rds proxy image
 
 ### RedShift
 - It is data warehouse(acquire data from various data sources db, logs, monitoring ,historical data)
 - It is fully managed petabyte scale data warehouse service of aws.It is realtional and based on postgresql, but noat at all same.Columnar sotrage.Parallel processing.Two nodes in cluster, leader and owrker, we connect with leader.
->>>>>> redshift architecture image
+![Screenshot 2024-01-02 at 7 24 00 AM](https://github.com/MadSn7/My_Learning/assets/62552772/92244015-91b9-4159-9cc1-a0c27b6645dc)
 
 #### Redshift Serverless
 - In case of normal one, we get assigned compoute capability which is not regular, so we have to bear cost for it as well.
@@ -893,10 +895,10 @@ Similar to docker compose.
         - Simple : have one attribute as primary key.
         - Composite : two attribute,partioion key(which server data present), sort key, in combination is unique
         eg : singerName, songName(both make it unique)
-        >>>>>composite key image
+        ![Screenshot 2024-01-02 at 7 41 58 AM](https://github.com/MadSn7/My_Learning/assets/62552772/948afd78-f60f-413b-8c89-bf61f6938d46)
     - Secondary index(another attribute on which you can query )
         - eg singerName,SongNAme is composite key, genre and albumtitle can be seconday index so you can query onto it.
-        >>>> image secoday inmdex
+        ![Screenshot 2024-01-02 at 7 45 02 AM](https://github.com/MadSn7/My_Learning/assets/62552772/15d0c508-0e93-4fac-86e3-82890409144a)
         - Global S.I.
         - Local S.I.
 - DynamoDB Streams
@@ -912,9 +914,7 @@ Similar to docker compose.
 - integrate with several services.
 
 - Secondary Index
-
     - Global Secondary Index (GSI): Allows querying on any attribute, not just the primary key.
-    
     - Local Secondary Index (LSI): Must be created at the time of the table creation and allows additional query flexibility for items with the same partition key.
 
 #### DynamoDB Accelarator
