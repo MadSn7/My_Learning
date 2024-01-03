@@ -608,11 +608,12 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 
 > 21/26 == 81% Correct
 
+
 ## Services - Compute
 
 ### EC2(Elastic Compute Cloud)
 - A place where your applications runs is server, EC2 is similar service for that server.
-- Earlier used to manual, buy setup deploy maintain a server, now you can use this aws ec2 service.
+- Earlier used to be manual physical ones, but setup deploy maintain a server, now you can use this aws ec2 service.
 - An instance is a virtual host, with some properties and configurations.
 - EC2 Instance Types
 ![Screenshot 2023-12-30 at 2 57 51 PM](https://github.com/MadSn7/My_Learning/assets/62552772/227cb0d5-f418-4c2a-a950-b2f3395c4758)
@@ -665,14 +666,14 @@ _ when user hit the request, it goes to nearby global accelator edge locations a
 
 #### EC2 Image Builder
 - Allows to customize images for yourself which can be used to deploy other servies.
-- Have version manage,ent as well so can roll back to previous images.
+- Have version management as well so can roll back to previous images.
 - Process
   ![Screenshot 2023-12-31 at 10 28 07 AM](https://github.com/MadSn7/My_Learning/assets/62552772/2138c294-602b-4a4d-9f94-ea9e5180a7ab)
 
 ### Elastic Network Interfaces(ENIs)
 - Can think of taking network configs separate from EC2 instance and using this for that.
 - It's present inside the azs, contains things like ip4/6 ip mac address etc.Definitely can assign several ENI to ec2 not sure of vice versa
-- A primary ENI is attached to EC2 when it is created an cannot be deleted, automatically gone when instance is terminated, if ec2 has public access primary/default ENI will have 
+- A primary ENI is attached to EC2 when it is created and cannot be deleted, automatically gone when instance is terminated, if ec2 has public access primary/default ENI will have 
 public ip attached to it.
 ![Screenshot 2023-12-31 at 10 34 12 AM](https://github.com/MadSn7/My_Learning/assets/62552772/682c5d9a-586a-4ddf-9f10-b23ce1632a5f)
 
@@ -705,7 +706,7 @@ public ip attached to it.
     - Need Load balancing
     - To be able to scale up or down accordingly
 - Container Orchestration solve this issue.ECS is aws's container orchestrator.
-- Containers runs on Either EC2 instances o Fargate.
+- Containers runs on Either EC2 instances or Fargate.
 - ECS is the brain, we need to provide compute like EC2 or fargate.
 - If we use ECS is not provided to other cloud providers so maybe difficult to transfer(EKS is there which is K8s version for cloud, easy for on prem to cloud or another cloud provider)
 - Other are difficult to work with, ECS is simpler to start.
@@ -725,7 +726,7 @@ Similar to docker compose.
 - We create a service in ECS.Makes sure a certain no of tasks are running at all times.
 - Responsible for creating tasks from task definition.
 - We mention how many task we want for particular task def.
-- In case of fail it will restart etc.Can think of ot as manager of tasks.
+- In case of fail it will restart etc.Can think of as manager of tasks.
 - We can create a frontend , backend, db service eg and mention each service how many task you want.
 - Load Balancer : We can deploy usual Load Balancer, attach to ECS, it will make sure to load balance according to current tasks and future task as well.We attach it to our service.
 (Optional but should create it for good usage)
@@ -737,19 +738,17 @@ Similar to docker compose.
 - Worker nodes is still you responsibility.
 - We get integration with other aws services as well.
 - For handling Worker nodes 3 options
-    - Self Managed Nodes : 
+    - Self Managed Nodes 
     - Managed Node Group
     - Fargate: similar to ECS,create worker nodes on demand.No need to maintain EC2 server.
-    `3 images`
     <img width="1005" alt="Screenshot 2023-12-31 at 7 04 16 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/93ef80f1-4ca6-4c25-b192-3ff9d615b957">
     <img width="1013" alt="Screenshot 2023-12-31 at 7 03 40 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/3e7cd1de-e1b4-4f38-8789-f14656348395">
 
 - Process for creating EKS cluster
 <img width="989" alt="Screenshot 2023-12-31 at 7 05 34 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b1b039ef-915c-4055-94fd-1e8ac99ccd83">
 
-- `creating eks cluster nodes process`
 - worker nodes depend upon mode you choose.
-- Then connedct worker node to your k8s cluster
+- Then connect worker node to your k8s cluster
 
 ### ECR(Elastic Container registery)
 - To store the docker images, palce to put and get the docker image.
@@ -771,7 +770,7 @@ Similar to docker compose.
 
 ### AWS Lambda
 - Serverless event driven service, just take your code set some event to start, aws will take care of the rest, it will scale up or down accordingly.
-- Lot of triggers and integrations, liek api gateway, s3 event notification etc.
+- Lot of triggers and integrations, like api gateway, s3 event notification etc.
 - no server load, many runtime configs available.
 - We can upload function and it's dependecy in zip file to run, and we can also add layer to lambda function which contains all libs and configs to make our lambda function run, layer can also be shared to other lambda functions
 - Logs is set up default in cloudwatch.
@@ -812,6 +811,149 @@ Similar to docker compose.
 - This one has compute power, rest snow familty is sotrage,data etc.
 - Physically move data in/out of aws.They are also good for in extreme climate conditions.You can perform your operations and shift your data.Can run edge computing.
 
+>Quiz Compute
 
+> 21/26 == 81% Correct
 
+## Services - Database
+`aws database images`
+### AWS-RDS(Relational DB Service)
+- When we have our own db, we need to do several tasks ourselves and keep db administrator for it.
+- RDS is managed,scalable solution for running relational db in aws.RDS will manage security, durability etc according to your instruction.
+- Various DB Engines are supported like MySQL,PostgreSQL,MariaDB,Oracle,SQL Server.
+- Instance type for rds
+    - General Purpose : Perfectly balanced for price and performance.
+    - Memory Optimized : To Handle large amount of data.
+- Different Instance Types
+    - Single AZs : data will be lost, if az goes down.Good for staging and dev environment.
+    - Multi AZ-Instance : Automatic backup in other az,secure.
+    `imnage here`
+    - Read Replicas : Basically load balance read operations to various place, data is copied to two instance, write is in only one.read from either.`image here`
+        - at least for read it is active-active both instances.
+        - during dissater recovery, read replica can be made standlaone db.
+    - Multi-AZ Cluster
+        - have data in other regions
+        `image here`
+    - Blue-Green Deployment
+        - Two alternate DBs Cluster can make another Db main after checking the updates etc.
+        `image`
+- Multi AZs have additional cost,rds manages data consistency across instances,multi az have read in other azs too.
+- Storage types, general purpose, IOPS SSD(Best for production), magnetic(old, redundant).
+- RDS Configuration/Features
+    - DB Parameter Group : Contains engine version,settings, perforamnce, reosurce allocations
+    - DB Options Groups : Encryptions,
+    - Subnet Groups,Security Groups,Db Snapshots(data backup can be automatic), Parameter Store,insigts,monitoring, audit and log data,ssl and encryptions
+- Backup upto last five minutes either automatic or manual.
 
+#### RDS Aurora and Aurora Serverless
+- Designed to perform low cost high performance.
+- Full combatibility with mysql,postgresql.5x throughput mysql, 3x postgressql.
+- Traditional DB when have high data, gets troubled in update, copying data etc.
+- So compute and storage decoupled is best fro scalibility, availabolity, durability.
+`why rds image/architecture`
+- Several qualities, size copy of data across azs.
+
+`another image of aurora`
+
+- Two Types
+    - Provisioned : pre configured capacity, scale up is manual, is aurora global
+    - Serverless : on demand scaling, useful for variable and unpredictable workload, aurora globa v2 only
+        - Aurora global meaning on primary db cluster and upto 5 different read cluster in different aws regions.
+ - Measure quantiry ACU(Aurora capacity unit), 1 unit = 2GB.Min to take is 0.5
+ `aurora v1 and v2,`
+ - v2 is now used mainly.
+ - Have integraton with various aws services like s3, lambda, cloudwatch, redshift, etc.
+
+ #### RDS Proxy
+ - Aplications will open a number of connections to RDS, and if you have many instances/ servers running requiring connection to rds, there will be lot of connections.
+ - RDS proxy will have a pool of connections and applications will hit rds proxy for query and rds proxy will reuse those connections for query.
+ - RDS proxy is fully managed, fully compatiable with various engines of rds.Application can be on ec2, ecs,eks, lambda.
+
+>>>>>>>> why need rds proxy image
+
+### RedShift
+- It is data warehouse(acquire data from various data sources db, logs, monitoring ,historical data)
+- It is fully managed petabyte scale data warehouse service of aws.It is realtional and based on postgresql, but noat at all same.Columnar sotrage.Parallel processing.Two nodes in cluster, leader and owrker, we connect with leader.
+>>>>>> redshift architecture image
+
+#### Redshift Serverless
+- In case of normal one, we get assigned compoute capability which is not regular, so we have to bear cost for it as well.
+- So we have serverless option,capacity gets automatically up or down.RPU hours is the unit for capacity utilizations.
+
+### DynamoDB
+- Solved problem of scalibilty in NoSQL type databases.
+- Managed service so aws manage underlying architecture.
+- No need to have defined and fix no of attributes like relational dbs.
+- Components
+    - Tables : Similar to rdbms(user)
+    - Items : Entry within your tables, (user1,user2)
+    - Attributes : Property of your item.(userName etc)
+    - Each item in table will have a attribute as primary key, to distinguish between others.
+    - Primary Key
+        - Simple : have one attribute as primary key.
+        - Composite : two attribute,partioion key(which server data present), sort key, in combination is unique
+        eg : singerName, songName(both make it unique)
+        >>>>>composite key image
+    - Secondary index(another attribute on which you can query )
+        - eg singerName,SongNAme is composite key, genre and albumtitle can be seconday index so you can query onto it.
+        >>>> image secoday inmdex
+        - Global S.I.
+        - Local S.I.
+- DynamoDB Streams
+    - Any change in dynamoDb appears as a record in Streams.
+    - Contains table data and metadata, 24 hours life.
+    - Can attach to lambda as well.
+- Table Class
+    - Each table is either of the two, seconday index will have same type class
+    - Standard Access(Good for general purpose)
+    - Standard infrequent Access(Storage is main)
+- Support both key-Value, Documnet data models.serveless.
+- Global tables active-active, both read and write from here.
+- integrate with several services.
+
+- Secondary Index
+
+    - Global Secondary Index (GSI): Allows querying on any attribute, not just the primary key.
+    
+    - Local Secondary Index (LSI): Must be created at the time of the table creation and allows additional query flexibility for items with the same partition key.
+
+#### DynamoDB Accelarator
+- Cache meant for dyanmoDb, if we can get result directly from DAX.So faster query resolution.
+
+### OpenSearch
+- Similar to ElasticSearch/Kibana, for logs etc monitoring.
+- Also have serverless offering, and opeserach integrations from logs etc producer service.HAs clusters called as Domain.
+- Can attach quicksight to visulize the data.
+
+### ElastiCache
+- Managed cached service.Have clusters.
+- Two types
+    - Redis
+    - MemCached
+- Add cache to RDS, have global quick access.
+
+### MemoryDB for Redis
+- db+elastiche = one, act as db, inMemory save data.
+
+### DocumentDB
+- mongoDB compatible service in aws, managed by aws, so no issue for scaling and managing structure for thi noSql.
+- Has fetature of global cluster, can have data in five different aws regions
+- Allows for read preferneces accordingly to your need.
+
+### Keyspaces
+- Apache cassandra managing aws service.
+- On-demand or provisioned type.
+- Multi region keyspace for replication across tregions so have global read write, active - active.
+
+### Neptune
+- Graph database, when you want to identify relationship.Global distribution.Also have ML part.
+- Serverless option, high throughput option etc.
+
+### QLDB
+- Quantum Ledger db, in ledger data should not be changed, tradiotional db have this issue.
+- Record of transactions and transaction logs.
+- has a ds jpurnal type which has append only property.
+- Stores history as well.Financial transaction best usage.
+
+### TimeStream
+- Time based db, usage for iot devices like real time data.good integration b/wn analytics tools among other services.
