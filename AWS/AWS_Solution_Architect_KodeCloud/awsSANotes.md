@@ -1170,9 +1170,7 @@ Types of Topics
 - Services provided to aid tranfer data etc from onprem or other cloud env to aws environment.
 - Need to have knowledge about our current infra and anslyze steps needs to be taken.
 
->>>> All Migration service image
-
-
+<img width="927" alt="Screenshot 2024-01-06 at 12 22 33 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/f1ce06fb-6ef2-4607-ad1e-4b656ae0dffb">
 - Also snow family is included as well.
 
 ### Migration-Hub
@@ -1187,7 +1185,7 @@ Types of Topics
 - Two ways
     - Agent Discovery : Uses lighweight software deploy in our on prem called agents which collect relevant data.
     - Agentless Discovery : On prem we have an VM installed having agent, which will collect the info.
->>> image of comaprision
+    <img width="1139" alt="Screenshot 2024-01-07 at 5 15 38 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/668d3662-61d8-492a-ac17-2a5f3a218792">
 
 - Info is pushed every 15 minutes across secure stl tunnel and stored in s3, can be used for analysing and useful for other services when deploying.
 
@@ -1254,7 +1252,8 @@ Types of Topics
 - Another IaC service, but in here you get to define your infra in Traditional Programming languages like python, java, js etc. 
 - Benefits from cloudformation cause we get many libraries, and logic building.
 - Utilizes cloudformation templates under the hood.
->>>> cdk images here
+<img width="991" alt="Screenshot 2024-01-08 at 3 46 29 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/e12e35de-c64f-4049-991d-eb7e6e657e10">
+
 - Uses AWS Construct library according to language of your choosing.
 - Similar to templates codecommit and codebuild you can have pipeline for this as well.
 - cdk cli tool uses nodeJs so have to install it.
@@ -1262,8 +1261,8 @@ Types of Topics
 - cdk init app --language yourLang // for having base template
 - cdk init sample-app --language yourLang // base template + quick deploy basic template
 
+<img width="983" alt="Screenshot 2024-01-08 at 3 49 04 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/6a5ab8f3-943a-4557-9df6-b35024764230">
 
->>> pipeline image
 
 ### Cloudwatch
 - Monitors all your resources and applications you run on aws, and you can generate notification if any metric is not have value according to your need.
@@ -1282,7 +1281,7 @@ Types of Topics
 - A trace is single request, from entering our system to it going our with response.
 - Segment : A part of our trace, like it goes through ec2, it is one segment, then goes to db, that is on segment.
 - Service map : shopws all services and componenets that makes up our application.
->>> basic pic of request and it's trace and segment.
+<img width="968" alt="Screenshot 2024-01-08 at 7 06 13 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b2ddd622-c828-43ad-86ae-ee36a4d560a9">
 
 ### AWS Health DashBoard
 - Place where we can come to know the status of our application are running okay or not.
@@ -1326,7 +1325,7 @@ Types of Topics
     - Root Account : Holds all account, rules here apply to all other account.Created when you create an organization, can have only one root acccount.
     - organization unit : Groups accounts of one type together and apply policy on them
     - Management Account : handles management for working with all accounts, inviting new account, editing etc.
-    >>>> Image aws Org
+    <img width="1008" alt="Screenshot 2024-01-09 at 4 15 20 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/12f356d0-3ff7-49ee-ac49-858d7edfea52">
     - scp : service control policies, apply this policy to all accounts or a group of your account.
     Think like IAM policy for account.
 - No additional charges, good integrations with IAM, SSO,cloudtrail etc.
@@ -1340,10 +1339,11 @@ Types of Topics
 - Have landing zone environment so if you are new can start up organizations and different account ytpe setup.Has Preventive and detective Gaurdrails thorugh IAM policy.
 -Two Oraganizational units, foundational has logs and security auudit and addition OUs(production , dev etc)
 - preventive gaurdrail say don't allowed to create a public s3 bucket, detective an be ec2 is launched without key-pair.
+<img width="1006" alt="Screenshot 2024-01-09 at 4 16 45 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/b430c014-cbc4-4e5d-860e-f7c057076fb2">
 
 ### Systems Manager
 - Goal is to help you manage server whether it's in ec2 or any other service.
->>>>> image system manager
+![Screenshot 2024-01-10 at 2 20 13 PM](https://github.com/MadSn7/My_Learning/assets/62552772/e121316f-010e-4e8e-b002-847ed3e17bad)
 - SSM agent is installed into EC2, VMs etc server which can connect with system manager.We can run some commands or push some changes in all server.
 - Got various different features and services.
 - Has application manager in which you can group all server, services of on application together so as to work on it and monitoring together.
@@ -1398,7 +1398,7 @@ Contains rules which has allow/deny,on which resource,what actions.
 - Identity center allows us to manage user in a central place.
 - Permissions setting is similar to IAM.
 - Here permission set is used similar to IAM policy, we give permission according to account.
->>>> image iam sso
+<img width="922" alt="Screenshot 2024-01-13 at 7 10 14 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/929254e4-569a-43f0-a795-253d75a20b3f">
 
 ### Cognito
 - Implement authentications service provided by aws for your application.It is at app level not aws users/accounts. etc.
@@ -1493,7 +1493,7 @@ Contains rules which has allow/deny,on which resource,what actions.
 - AWS secret manager helps saves, load, distribute secrets to be sued by applications/services.
 Any type of secret can be stored, basically a key value pair.
 - Have access control way to limit who can access etc.
->>> image secret image
+<img width="943" alt="Screenshot 2024-01-14 at 6 48 14 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/d03ca3fe-7e58-4422-b84c-31a28c900292">
 
 ### NACLs and Security Groups
 - NACLs associate with subnet.Stateless.
