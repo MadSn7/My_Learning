@@ -1,4 +1,4 @@
-<img width="1003" alt="Screenshot 2024-01-01 at 12 37 41 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/af0c6ed2-9898-454d-86f2-023a6fc58f64">![Screenshot 2023-12-30 at 3 06 03 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c402ebeb-71ba-4736-b922-b0460a98f099)# AWS SAA
+># AWS SAA
 
 ## Introduction
 ### Why take this course
@@ -817,6 +817,7 @@ Similar to docker compose.
 
 ## Services - Database
 <img width="973" alt="Screenshot 2024-01-01 at 12 20 33 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/df04d098-1f4b-4e3f-aaa8-a48d6ae93049">
+
 ### AWS-RDS(Relational DB Service)
 - When we have our own db, we need to do several tasks ourselves and keep db administrator for it.
 - RDS is managed,scalable solution for running relational db in aws.RDS will manage security, durability etc according to your instruction.
@@ -957,3 +958,584 @@ Similar to docker compose.
 
 ### TimeStream
 - Time based db, usage for iot devices like real time data.good integration b/wn analytics tools among other services.
+
+>Quiz database
+
+> 10/25 == 40% Correct
+
+>## Services – Application Integration
+### AutoScaling
+- Used to dynamically increase/decrease ec2 instances running according to demand.
+- Property
+    - min : min no of ec2 that should be running
+    - desired : your ideal case(will get these at start)
+    - max : upper limit
+- Components
+    - Auto Healing : When an Ec2 instance is not deemed healthy, it terminates the ec2 instance and deploy new one.
+    - Scaling Policy : Scale the ec2 instances according to min, max no and according to use
+        - Manual : Change desire number manually
+        - Dyanmic
+            - Target tracking Scaling : Measure some metrics and scale accordingly.
+            - Simple Scaling : Setup cloudwatch alarms, and scaling takes place according to policy.(fixed value)
+            - Step Scaling : Similar to above one, setup alarm, add some more conditions, like if else.(different value according to condition)
+        - Scheduled : More time predictable workload, can setup at some time.Can have cron job for effecting these policy according to time;
+- Need to have a launch template, it tells the specifications of new ec2 that need to be deployed, the ami image, sgs, access keys etc details.
+- Integrate with ELB, to load balnce to various ec2 deployed, cloudwatch, sns topic message, ec2(for this itself).
+
+### Elastic LoadBalancing
+- There are usually more than on instance handling a website, now they will have separate ips so need a single point to balance request across every server as well as keep the ip constant.
+- It is highly scalable, span across multiple azs service.
+- Need to configure two things listeners(a ip) and target(server like ec2 etc).
+- Can be both public and private lbs.Can have cross zone load balancing.
+- types : Applicaction LB,Network LB
+
+### API GATEWAY
+-  Integrating various types of backend service,like lambda,ecs,ec2 etc, managing and deployment of apis
+- API gateway does that and also request and transform request reponse, security and access control, authorisations types.Rate limiting and throttling.Monitoring and analytics.Also helps and support documentation
+- Supported API Types
+    - HTTP API
+    - WebSocket API : used in real time applications
+    - Rest API
+
+
+### App Flow
+- Amazon AppFlow is a fully managed integration service that enables you to securely transfer data between Software-as-a-Service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and AWS services like Amazon S3 and Amazon Redshift, in just a few clicks.Bridge between different tools so data can flow to these services.
+- Components
+    - Connector
+    - Source, Destination and their mappings
+    - Trigger
+- Integration with several of aws services, and many third party services.
+
+### SNS(Simple Notification Service)
+- AWS Service delivers real time messages from publishers to subscribers.
+- Components
+    - Topic : Message are published here, you add subscriber here which takes note of this message and work accordingly.
+    - Subscriber : They will take message from the topic and can according to logic what should be done.Can be wide variety of services in aws like lambda , ec2 etc.
+    - Publisher : They send the message to topic can be variety of different things.
+Types of Topics
+    - Standard : May not show up in order of generation and maybe be duplicated, high scalable.
+    - FIFO : Will show in order, no duplications.
+- 1-10 message per api request, batch to save cost.
+- If you have large payload, can store payload in s3, and share the reference in topic message.
+- over 60 aws service integrations,securely encrpt message, send 
+
+### SQS(Simple Queue Service)
+- When you have several services which works on after another, their may be backlog until the request is completed from one service to reach to another service.
+- Can attach SQS between services so the services are free to do another task and can sned their request in queue in sqs to be resolved by next in order services.
+- Message Decoupling, load leveling, asynchronous,serverless and scalable.
+- Componenets
+    - queue : act as buffer which retrieves and stores messages from producers
+    - message : unit of communication in sqs, have message attributes as weel aka metadata.
+    - producers : they produces message
+    - consumers : they consumes the message from queue.
+    - DLQ(dead letter queue) : Optional, a message can have a fixed no. of retries to be processed, to avoid and isolated failed message can be analysed later time.
+- Two Types
+    - Standard : not ordered, may duplicated, high throughput and scalable
+    - FIFO : ordered and no duplicates
+- Integration with lot of service.
+- HAve only one condumer, sns can have many subscribers
+
+
+#### The main difference lies in the foundation of the services. SQS is poll-based and SNS is push-based service. That means SNS is simply forwarding all messages to your subscribed consumers, whereas SQS really saves the messages in a queue and waits till they get picked up.
+
+### Amazon MQ
+- Managed message queing broker service, for application that use active mq / rabbit mq.
+- Similar to sqs, if you are starting something new or already in aws use sqs, if using older application, just use amazon mq in that place.
+
+### EventBridge
+- Basis for event driven bridge system.Allows to be decoupled and can be scaled according to events generated.Can route events according to condition.
+- event source -> bus -> according to tules -> reach target/s service
+- Components
+    - EventBus : Location where we sent event, and gets driven to its place from here.Different types of bus availble.
+    - Pipes : Routing events from single source to single target.Can filter, tranform etc to data in between.
+    - Scheduler : Create schedule according to pattern etc.
+- Have event replay feature so can check waht went wrong to a particular event.Scheman registry to check structure.
+- 200+ built in source and targets aws servce.
+- have deault bus for an account alreasdy.
+
+### SES(Simple E-Mail Service)
+- Aws based email sending service, can scale up according to requirement.
+- Componenets
+    - Verified identities : Email/domain which used to send emails.
+    - Configuration sets
+    - Dedicated ips
+    - email recieve info : what to do if we get some mail
+- Various features.
+- Can integrate with various aws services like lambda, sns topic, s3 for storage mail.
+
+### Step Functions
+- To monitor step by step flow of our application, workflow orchestration.
+- 220 + aws services and 100000+ apis integrations.
+
+### Simple Workflow service
+-  Task coordinator, similar to step functions, use step function in general recommended, you can use python,java etc to build you logic for workflow.
+
+### Managed Apache Airflow
+- Amazon manage underlying apace airflow infra, no difference from the open source version.
+- Build data pipeline in DAGs and define in code.Various integrations.
+
+> QUIZ
+> 10/27 = 37% 
+
+## Services - Data and ML
+
+### Kinesis
+- Real time data streams.
+- Several types
+- Kinesis Data Streams
+    - Takes various type of data like images, video, from different sources and send it to different services like lambda, ecs,emr etc.
+- Kinesis Data Firehose
+    - Firehose can do ETL, so we compute here only and save it to some data storage like s3, redshift etc.
+    - near real time, but not fast like data streams
+- Kinesis Video Stream
+    - For video audio related to time as well, sent it to consumers and then can do several things.
+    - producers to consumers.
+### MSK(Managed service for Kafka)
+- Run apache kafka in aws serverlessly, same architecture consumer producer topic.
+
+### Glue(GLUE ETL)
+- Main job is ETL, among various features.
+- Spark environment, glue scripts working.
+
+### EMR(Elastic Map Reduce)
+- Power house of big data processing not just etl.
+- Runs managed cluster having big data technologies like hive,pig, hadoop, spark etc.
+- Have different types of nodes in cluster
+    - Primary : Node manages the cluster by running softeware and manage other nodes.
+    - Core Node : Stores data and , manages that.
+    - Task node : they do the processing, not necessarily store data(optional)
+- Has steps of process run one by one, if one fails , next one fails and other are cancelled.
+- Use spots node to reduce price.
+- Integrate with lot of aws services.
+
+### Glue DataBrew
+- Different from glue etl, this one is completely visual.We don't write any code.We pick one of the given options.
+- no servers, all visual
+
+### Lake Formation
+- Aggreagration of meanigful data for a company from various sources.
+- Done and stored in S3 and we view as tables, in a format you like for analytics optimization.
+- Basically storage of data and supports analytics etc.
+
+### Athena
+- Enables to read data sets, pull the data into dashboard and query engine, has crawler like usage to identify the data structure and able to query.
+- Can take data from s3, glue data catalog etc using sql like query.Serverless.Integration with various aws storage services.
+
+### QuickSight
+- Visualization dashboard, used when have to show graphics for data.
+- Has spice enigne with it.QuickSight q for ML etc.
+
+### SageMaker
+- Premier machine learning servce for ML.Basically math, algo and patterns.
+- Have data source, then preapare and improve data have notebooks etc for it.,then train models,model evaluation and tuning, check results and deploy it.
+
+### Rekognition
+- Given an image tags the image according to contents present inside it.For both images and videos.Can use it with S3 etc.Facial analysis, scene, text images,activity, unsafe content.
+
+### Polly
+- Convert text into voice, basically does that.
+- Transcirption is uploaded we can use polly to convert it to voice.Transcribe does speech to text used with it.
+
+### Lex
+- Chatbot, user to chat bot.Lex governs it.To design chatbot process, NLU and ASR feature.
+
+### Comprehend
+- Text analysis machine, give it letters, email etc and it gives basic undersatding about it.
+- It will identify PII(Personal info like number ,address etc.)NLP
+
+### Forecast
+- Take time series etc data, and it gives probability of something happening.Give it data and it work on it, sagemaker you need to know some ml, here it is easy and many steps it does it itself."No machine learning experience type questions"
+
+### Augmented AI
+- Augmented intelligence is a design pattern for a human-centered partnership model of people and artificial intelligence (AI) working together to enhance cognitive performance, including learning, decision making and new experiences
+
+### Fraud Detector
+- Helps to identify fraud/ malicious activity, don't need any prior ml knowledge
+-  Uses ML,real time.You can attach request to it to identify frauds.
+
+### Transcibe
+- Convert speech to text, can hanlde 10 speakers.
+
+### Translate
+- Transaltion service,high quality 5000+ language translation
+
+### Textract
+- Automatically extrats text and data from scanned documents.So basically physical files data is converted in to digital data and then we can work onto it.
+- test, form, sign, table extraction.
+
+> Quiz
+> 23/25  91%
+
+## Services - Migrations and Transfer
+- Services provided to aid tranfer data etc from onprem or other cloud env to aws environment.
+- Need to have knowledge about our current infra and anslyze steps needs to be taken.
+
+>>>> All Migration service image
+
+
+- Also snow family is included as well.
+
+### Migration-Hub
+- Centralized location to track and monitor of various migrations/transfer realted services.
+- Also have discovery process to get infor of our on prem info.
+- Agent Discovery and Angentless Discovery.
+- Assess the above info and give estimated cost if deployed to aws.
+- Then migration can take place.
+
+### Application Discovery Service
+- This is the disovery discussed above,it is also able to identify depedency and relationship between various services present on prem.
+- Two ways
+    - Agent Discovery : Uses lighweight software deploy in our on prem called agents which collect relevant data.
+    - Agentless Discovery : On prem we have an VM installed having agent, which will collect the info.
+>>> image of comaprision
+
+- Info is pushed every 15 minutes across secure stl tunnel and stored in s3, can be used for analysing and useful for other services when deploying.
+
+
+### Application Migration Service
+- Responsible and does actual migration.
+- Physical, vms, other cloud etc will help in migration of all those.
+- Staging area we deploy resources and then we have these deployed to our required region,subnet etc.
+
+### DMS(Database Migration Service)
+- To help db and analytics migrations from on prem to aws.
+- Componenets
+    - DMS Fleet Advisor(Has dms data collecter isntall it in db, and give db)
+    - DMS Schema conversion : convert db object correctly, make schema changes accrdingly.
+    - Replication Instance : take data from on prem and replcate to aws,we have replications tasks for it.Have types
+        - Full Load : There is Outage long enough for copying to aws.
+        - Full Load + CDC : simultaneusly keep trac of changes on source.
+        - CDC Only : This process is called ongoing replication or change data capture (CDC).  
+
+### Elastic Disaster Recovery
+- In times of downtime in on prem/other cloud, we can have our services running in aws.
+
+### AWS MainFrame Modernization
+- Moderninzing legacy system to moderm technology.
+
+### Datasync
+- Provide fast data transfer between on-Prem to AWS environment.
+- Have agent and locations (destination and source), tasks and task execution.
+- On stop solution for transferring data to any sotrage service, also assist in cross regions data migration.
+
+### AWS Transfer Family for FTP/AS2 Not running video
+
+### AWS Snow Family
+- Physical storage hard drive.
+- So physically bringing data from elsewhere to AWS.
+- We will have durable, rigid, safe storage devices.
+- It has NFS endpoint,encyption with it.
+- Componenets
+    - Snowball Edge
+    - Snowcone
+    - Snowball
+    - Snowmobile : get trucks, high amount of data.
+
+
+>>> Quiz 6/24 = 25%
+
+## Services - Management and Governance
+
+### CloudFormation
+- IaC(infrstructure as code), earlier it was cumbersome and manual too.
+- Now we have blueprints i.e templates upon which we can build our infra.
+- Cloudformation you create template and add all you resource you want, and cloudformation is gonna configure all resources according to it.
+- Supports both json and yaml format.
+- You create stacks to kind of keep resources together, resources are created/updated in stacks.Just edit the template to update your changes.It updates change set according to edit and that changes take place.
+- Aws codecommit is aws's git like versioning, and we can integrate this with aws codebuild ci/cd pipeline to deploy.
+- Features
+    - It is IaC, so we get documents and git etc versioning.
+    - Consistent and repeatable deployment.
+    - Cost , time efficiency and tested templates.
+- have various tags and property to attach according to resource provisioning condition.We can have !Ref someResourceInTemplate to attach elsewhere(ec2 instance attach a sg that is deployed together, got no name.)
+- We can have parameters, so as to take values, and outputs as well, like some public ip after resource is deployed. !GetAtt resourceName.property you want.
+
+### CDK
+- Another IaC service, but in here you get to define your infra in Traditional Programming languages like python, java, js etc. 
+- Benefits from cloudformation cause we get many libraries, and logic building.
+- Utilizes cloudformation templates under the hood.
+>>>> cdk images here
+- Uses AWS Construct library according to language of your choosing.
+- Similar to templates codecommit and codebuild you can have pipeline for this as well.
+- cdk cli tool uses nodeJs so have to install it.
+- various commands like cdk diff, synth, deploy, destroy etc.
+- cdk init app --language yourLang // for having base template
+- cdk init sample-app --language yourLang // base template + quick deploy basic template
+
+
+>>> pipeline image
+
+### Cloudwatch
+- Monitors all your resources and applications you run on aws, and you can generate notification if any metric is not have value according to your need.
+- It collects logs from various services, you can customize your application to send extra logs/info and we can also push logs to aws, and cloudwatch extract metrics from it, and we can set up alarms if according to conditions.
+- Components
+    - Metrics : Some measurable quantity like cpu utilization etc.Can make custom as well.
+    - Alarms : Can place confition of metrics so if any is not working to our need it is triggered.
+    - Log
+    - Events : Was called cloudwatch events, now eventbridge.Define custom rules, on certain event react to that acccording.
+    - Has Dashboard and Insights(sql like query on log groups).
+- A good application is with auto scaling and cloudwatch alarms and metrics.
+
+### X-Ray
+- Distributed application has problem to identify what is the source of the issue, where the application is breaking.
+- So x-ray recieves traces from many native applications components, it shows each steps of the request, time it took etc.
+- A trace is single request, from entering our system to it going our with response.
+- Segment : A part of our trace, like it goes through ec2, it is one segment, then goes to db, that is on segment.
+- Service map : shopws all services and componenets that makes up our application.
+>>> basic pic of request and it's trace and segment.
+
+### AWS Health DashBoard
+- Place where we can come to know the status of our application are running okay or not.
+- Public events : Affected to all worldwide.
+- Private : Some particular instance of a service issue.
+- You can also have alerts attached with it to know if/any service goes down.
+
+### Prometheus
+- Collects different stats about metrics, and store them to check previous usage and status.
+- Think of it as open source cloudwatch.
+- uses PromQl
+- Componenets
+    - Targets : Application of which you get metrics, data about.
+    - Inside server you have retriever which send http requests to collect info about targets.
+    - Time Series DB : Insisde server data gets collected here.
+    - Http Server : Query to here to get metrics from db.
+- amazon provides managed server prometheus server.
+- We can integrate with cloudwastch as well, as well as on prem prometheus.
+
+### Grafana
+- To view logs cloudwatch has UI, but it's not that great.
+- We can have graphana to do that, it will query metrics.
+- Very flexible, interactive.
+
+### Trusted Advisor
+- Provides real time guidance, to follow  aws best practices.
+- Suggest for cost cutting, security groups, security etc.
+
+### Launch Advisor
+- Simplify process for deplying third party applications.EG : SAP, AD etc.
+- Has templates for third party applications so it will work optimally.No extra charge paying only for applications running.
+
+### Compute Optimizer
+- Provides oprimization suggestion for our compute resources and EBS volumes as well.
+- It does analysis, then provides reco to cost saving or size/capacity oprimization.
+
+### AWS Organizations
+- You or a corporate comany may have different accounts, managing different services and resources.Billing would be separate, but ideally we want to get them in one account.Security,scaling issues, sharing resources etc cause issues.
+- This similify managing several accounts.We have a master account.So master can set company wide organizations, rules etc.
+- Componenets/Architecture
+    - Root Account : Holds all account, rules here apply to all other account.Created when you create an organization, can have only one root acccount.
+    - organization unit : Groups accounts of one type together and apply policy on them
+    - Management Account : handles management for working with all accounts, inviting new account, editing etc.
+    >>>> Image aws Org
+    - scp : service control policies, apply this policy to all accounts or a group of your account.
+    Think like IAM policy for account.
+- No additional charges, good integrations with IAM, SSO,cloudtrail etc.
+
+`CloudWatch is a monitoring service for AWS resources and applications. CloudTrail is a web service that records API activity in your AWS account`
+
+### Control Tower
+- Helps organizations setup and maitains several accounts.
+- Built on top of aws organizations.
+- Control tower automates the process of creating accounts and it's policy.
+- Have landing zone environment so if you are new can start up organizations and different account ytpe setup.Has Preventive and detective Gaurdrails thorugh IAM policy.
+-Two Oraganizational units, foundational has logs and security auudit and addition OUs(production , dev etc)
+- preventive gaurdrail say don't allowed to create a public s3 bucket, detective an be ec2 is launched without key-pair.
+
+### Systems Manager
+- Goal is to help you manage server whether it's in ec2 or any other service.
+>>>>> image system manager
+- SSM agent is installed into EC2, VMs etc server which can connect with system manager.We can run some commands or push some changes in all server.
+- Got various different features and services.
+- Has application manager in which you can group all server, services of on application together so as to work on it and monitoring together.
+- has Parametrer stores which saves you secret keys and password and application can access them from there.
+- Change manager, Automations,Change calendar(scheduling something)
+
+### Service Catalog
+- Provides curated services for user, cloud administrator etc manages what services to be made available.
+
+### License manager
+- Handles license mangement, usage and costing for your according servies usage.
+
+### Proton
+- Standaririze microservices across environmnets.
+`not sure get more info about it`
+
+### Resource Group and Tag Manager
+- depending upon tag we can group resources for better monitoring and understanding of our applications.
+
+### Resilience Hub
+- Set up your disaster recovery particular for aws environment, helps in that.Does continous monitoring.
+
+### Resource Explorer
+- find rspurces deployedd across regions.
+`not sure get more info about it`
+
+### Resource Access Manager 
+- Allows to share resources across accounts, like share S3 bucket to various accounts. 
+
+>>>> quiz 20/26 = 77%
+
+## Services - Security
+
+### IAM(Identity Access management)
+- Performs Authentications and autherizations for users/applications.
+- It's about security, centralisez management, compliance,auditing and least privelege Principle.
+- IAM user is created for a paricular user.
+- Groups are collections of IAM Users which needs to have similar permissions.(like dev group, audit group, management etc), easily apply rules for new user, as user can be assigned to a group.Also a user can have multiple groups assigned so as to have two or more groups property.
+- A new user can't access anything by default,we create IAM policy for it, it is made in JSON.
+Contains rules which has allow/deny,on which resource,what actions.
+- IAM has options to manage USER Groups, USERS,Roles,Policies.
+- When it comes to AWS roles vs. policies, a good rule of thumb is to remember that policies are applied to roles, which can then be assigned to individual users via roles.There are already various purpose policy created by aws, and you can create your own too.
+- Users/services can assume a temp role and perform those operations provided in role's policy.
+`check what is sts and assume role policy etc.`
+- In place of creating users and assigning the policy to it and then using user's credentials for accessing resource you can create role and attach to your service, then it can access those resource(
+    want EC2 to access S3, first way create a user which has s3 access, and provide it's access key and id to ec2's program and then run a program, or create a role and attach to ec2 it will be able to access without giving access key/ids.
+)
+
+### IAM identity Center (SSO)
+- Slightly different from IAM, successor of AWS SSO service
+- An user generally need access to more than one accounts.So yopu have create roles/ users for all of users, aand give permission to all.
+- Identity center allows us to manage user in a central place.
+- Permissions setting is similar to IAM.
+- Here permission set is used similar to IAM policy, we give permission according to account.
+>>>> image iam sso
+
+### Cognito
+- Implement authentications service provided by aws for your application.It is at app level not aws users/accounts. etc.
+- Implements password, authentications, forgot password etc.Integration with aws services.
+- Also allows socail login/register like from google ids,fb etc.
+- no minimum charge, pay as you use, scales automatically.
+- has Two Pools
+    - User Pools : Basic Authentication(have/give token to user after login)
+    - Identity Pools : Gives access to aws resources as well temporarily, after authentication. 
+
+### Directory Service
+- What is active directory?
+    - Directory created by MicroSoft that enables administrators to handle access of various users to various applications.
+- AWS Directory Service, is managed implementation of AD like directory.
+ - Modes
+    - Simple AD mode : standalone directory in AWS(not full implementation, runs in isolation)
+    - Managed Microsoft AD : Actual impletation of ms ad, any service in aws can utilize this, and if you have on prem AD can connect.
+
+### Verified Permissions
+- After you have done authentications of user, you need to handle it's permissions adn authorisations.
+- Helps developer to quickly develop app as helping in authentications.
+
+### CloudTrail
+- Design to track and record all api activity inside you aws account, so record every service every access by every mode from users/applications.
+- Can be stored in s3 or cloudwatch, default save is 90 days, can edit.
+- 
+
+### Config
+- Monitor configurations and configuration changes of various aws resources.
+- Before it we coudn't track all reosurces changes,manual process was cumbersome.
+- Willl note who changes so configurqation for a particular service, and we can create cloudwatch laerts etc, have various predefined rules as well to select according to your own need.
+
+### Artifact
+- This are reports providing auditing reports security and compliance.
+
+### GuardDuty
+- Protect and monitors you aws environment.
+- Have ML and other tech, check various logs,vpc log, and services for suspicious activites.
+- It can report finding, score it according to severity, and we can have alert on it as well.
+- you can provide Trusted IP list, Threat IP list, so it can keep look for it.
+
+### Inspector
+- Inspect compute services for software vulnerability, network exposure.
+- Automatically scan your reosurce all it's lifetime, specially after an update, patch etc.
+- NEED TO SPECIFY YOUR TARGET,and the assessment template i.e resource you want to be tracked.
+- Produce finding if found some issue, and score it according to severity.
+- Different types of vulnerability find
+    - package vulnerability
+    - code vulnerability
+    - network reachibility(over permission of network)
+
+### Macie
+- uses ML and pattern matching to secure PII(personal data) and sensitive data saved in S3.
+- Scans all objects and look for sensitive data, it will notify you about it.We can use it as well with other services to perform some actions.
+- You create jobs mentioning S3, and can also add type of sensitive data to look for or can check normal type of templates present.
+
+### Security Hub
+- All security helping services, main portal for all those services and all report can be seen here.
+- Central dashboard.
+- Integrate with various services.Can integrate eventbridge onto it and can take automatic actions/alerts for us
+
+### KMS(Key Management Service)
+- Involved with encryption(transform data into non human readable format).
+- Cryptographic key manages keys for encryption, and these keys management is done by KMS.
+- Key has key ID/arn,key material, policy,state, rotation status etc
+- Integrates with various other services, like S3 is automatically encypted.
+- Keys Types
+    - Customer Master Keys : Normal ones
+    - Data key : large amount of data encrypt
+    - Import key material
+    - AWS managed keys : automatically created according to your service usage.
+    - AWS owned keys : used across accounts by aws for several other data encyptions.
+- Types of encyptions
+    - Symmetric : single key for encrypt and decypt
+    - assymmetric : a public(encrypt) and private key(for decrpt)
+
+### CloudHSM(hardware security module)
+- kms keys are stored at random servers, so can be leaked, so we send it to hsm and stored in one device which is highly secured.
+- AWS gives managed HSM module so you can save keys here and send encyption/decyption request here.
+
+### Certificate Manager(Public certificate, internet)
+- Certificate for ssl/tls communications.
+- It is managed service to generate certifcate whenver needed by customer, can also import and managing certificates.Auto renewals.
+- Used with load balancer, api gateway etc.
+- Not supported with many services like ec2, s3 etc.
+
+### Private Certificate Authority(no internet, private)
+- Designed to create certificates to identify internal users/ your company.Internal servers.Not for the internet.Scalable.
+
+### Secrets Manager
+- DB has user and pass, don't want to save it in code like on github, don't want to hardcode.
+- AWS secret manager helps saves, load, distribute secrets to be sued by applications/services.
+Any type of secret can be stored, basically a key value pair.
+- Have access control way to limit who can access etc.
+>>> image secret image
+
+### NACLs and Security Groups
+- NACLs associate with subnet.Stateless.
+- Security Group is associated with apllication specific.Stateful.A security group can be associated with two services of different subnets.VPC specific.
+- Both acts like a firewall
+
+### Security Lake
+- Your service might be on prem, various cloud, so issue to see logs centralized.
+- It collects logs from multiple services, locations, events and manages logs at a centralized locations.
+- Stores the logs in S3 bucket, and can use athena etc fetures onto S3 stored logs.
+
+### WAF(web Application Firewall)
+- Sits infrom of your web applications and monitors all requests, and checks for threaths, sql injections etc.
+- Attach to you ELB, api gateway etc, understand HTTPS.Integrate with other services as well.
+- have webACls , are rules which requests to allow, check,conditions etc.Works according to webACLs.
+
+### Shield and Sheild Advanced
+- DDos Attack : Dirputing service functioning, with overwhelming flood of requests.It has WAF integrations, ROUTE 53 integrations etc.
+- Shield is used for against DDos.
+- Two Types
+    - Standard : enabled by default
+    - Advanced : Protect against specialised attacked as well,(3000 $ month), 24/7 access.(DDos attack , bill increase will not be counted)
+
+### Network Firewall
+- Network protection at the vpc layer.Traffic entering and leaving.
+>>check what it does Firewall Endpoint ?? 
+- when request enters vpc it is sent into firewall subnet, it get's sent into firewall check and then if allowed goes ahead to private subnet having resources.
+- have both stateless and stateful engines.
+
+### Firewall Manager
+- Have various accounts, need to configure various firewalls for each accounts, and rule keeping becomes cumbersome.
+- It provides centralised location for wafs, sgs, nacls,shield across various account as well.
+- Centrally enforce rules and conditions across various account's firewalls.
+
+>>> QUIZ 21/25 = 84%
+
+## Conclusion
+- Revise the contents
+- Retake the topic end quizzes
+- Try Mock Exam Until >= 95%
+- Check for design section whenever available.
+- Road Ahead
+    - Check other associate certtificates first before trying professional.
+
+
