@@ -16,7 +16,7 @@
 - Has ability to integrate with aws and non aws services.
 - Use Cases
     - Source can be aws aws codecommit(can also be s3, or artifact), build is aws codeBuild, deploy is with aws CodeDeploy.
->>> image of aws codepipeline
+![Screenshot 2024-01-15 at 2 12 07 PM](https://github.com/MadSn7/My_Learning/assets/62552772/0f73c5c7-e3f6-4cfc-b31f-abfac7491bb5)
     - can mix-match aws services and non aws services like source can be github, build with jenkins and dpeloy with aws codeDeploy etc.
 
 ### Integrations of CodePipeline
@@ -84,7 +84,7 @@
     - Jenkins can be replaced with codeBulild if we have all Aws deployment, also both can be used all together or migrate from one to another(plugin is added between them)
 - Features
      - Comes with preconfigured run environment for java, python,docekr etc.Can create your own.
-    >>>> process image
+    <img width="991" alt="Screenshot 2024-01-21 at 1 11 22 PM" src="https://github.com/MadSn7/My_Learning/assets/62552772/3b588a23-f042-4bdd-8d58-7a540d2ec64c">
     - Supports monitoring through cloudwatch and notification through SNS.
     - Can be integrated with codePipeline or used by itself.
 - Working
