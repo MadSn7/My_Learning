@@ -1174,7 +1174,7 @@ Types of Topics
 - Also snow family is included as well.
 
 ### Migration-Hub
-- Centralized location to track and monitor of various migrations/transfer realted services.
+- Centralized location to track and monitor of various migrations/transfer related services.
 - Also have discovery process to get infor of our on prem info.
 - Agent Discovery and Angentless Discovery.
 - Assess the above info and give estimated cost if deployed to aws.
@@ -1538,4 +1538,10 @@ Any type of secret can be stored, basically a key value pair.
 - Road Ahead
     - Check other associate certtificates first before trying professional.
 
+Now Revision and retest
+- My dummy SAA Exam result 
+    - Prev
+        - 31/65 == 48%.(Recommended ~70%)(Fail Currently)(Took I think 2 hours lengthy paper)
+    - 19 Jan
+        - 41/65 == 63%
 
