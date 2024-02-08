@@ -121,14 +121,14 @@ rm aFile // removes a file
     - we need a switch in between them to connect
     - Need interface to connect to switch, can check by ip link.
     - swtching enable to connect between same network computers.
-    >>>> swtiching image
+    ![Screenshot 2024-02-01 at 3 43 45 PM](https://github.com/MadSn7/My_Learning/assets/62552772/b0b67800-50d4-4b3e-956a-787ccb0b0c4d)
     - What happens if we havve several networks, and want to conenct between different networks system.
 
 #### Routing
     Helps connect two network together.
     Get as many ip assigned as many network attached.
     Router is just another network like any other device.How switch know to send to router?
-    >>>> Router image
+    ![Screenshot 2024-02-01 at 3 46 48 PM](https://github.com/MadSn7/My_Learning/assets/62552772/c42bb093-d405-4363-b7fb-8a138a56d06e)
 
 #### Gateway
     A gateway or route, so gateway is door for a network to go out to other network.
@@ -143,7 +143,7 @@ rm aFile // removes a file
 - Earlier it was done like this for all systems in netwrok but comuter number grew.
 - So we moved all this to a particular server holding all dns name called dns server, so to resolve names, always dns server is reached.So only dns server need to be configure in other network machines, and update in dns server is updated everywhere.Some or all machines can have dns names as well.First local system is read if not found then dns server.This can also be changed.
 - Domain name, ip transalte to name in public domain(intenet) to not have to remember ip.
->>> domain name infor 
+ <img width="984" alt="Screenshot 2024-02-02 at 1 59 24 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/e54580b0-d13d-43d5-ac8a-b0980e12c46c">
 - Your router caches ip of domain name after first visit to load faster at next time of visit.
 - Various record types for saving dns name and ip.
 - Ping , maybe nslookup much better can be used.
@@ -159,17 +159,14 @@ rm aFile // removes a file
 - When you install java not only libraries and various other things are installed but also JDK is installed as well.
 - earlier JDK and JRE were downloaded sparately(1.8 and before), so can run only using JRe but now together(since java 9)
 - earlier java version vere called 1.5,1.7,1.8 bu later on being called java 9,10,17,19 etc.
-
->>> jdk image
-
+<img width="946" alt="Screenshot 2024-02-02 at 2 27 39 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/679101fd-26a9-4612-9a9f-9d9893598234">
 - javac fileName.java -> java fileName, build method for a file
 - Application has many files and many dependency,so an archiver help is needed.So JAR(java archive) helps compress and compile multiple files and their dependency.(web file image can be bundled in WAR)
 - jar cf MyApp.jar file1.java file2.java ...... to create MyApp.jar with your given files.Automatically generated Manifest.MF file,inside META-INF folder
 - Manifest.MF contains various info and metadata, like entrypoint/starting point of application.
 - java -jar MyApp.jar // can be run anywhere where java is installed.
 - javadoc can help documentation of you files.
-
->>>> java build process image
+<img width="899" alt="Screenshot 2024-02-02 at 8 16 05 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/2850b947-9024-45b6-9c00-363372889537">
 - When files increase and various developers are involved this steps are difficult to perform and we instead use build tools like Maven(pom.xml),Gradle,Ant(build.xml) etc (used extensively with java)
 - These tools does compile,pakcage and document.Have a file like xml containing instrudction for buil dependecny etc.Works similar.
 
@@ -341,7 +338,7 @@ most famous one usage.
 - Used to genreally represent data, generally config data.
 - Key Value pair
     - Type: Name (a space is after :)
->>> yaml image
+![Screenshot 2024-02-05 at 7 31 38 AM](https://github.com/MadSn7/My_Learning/assets/62552772/da32b4a4-0583-44a0-9c5d-c3764b414e9e)
 - No of spaces is very important, make sure they are equal.
 - Dictionary is unordered, list is ordered(array).# to comment
 
@@ -350,10 +347,11 @@ most famous one usage.
 - list is [{element1},{element2}]
 - JSON Path is query language for JSON like sql for dbs
 - root dictionary is $ so start query with $ like $.car $.bus etc to query.
->>> JSON Image
+![Screenshot 2024-02-05 at 2 58 31 PM](https://github.com/MadSn7/My_Learning/assets/62552772/36344bb0-32c4-44e3-9e42-a665acc3e5de)
 - Any output is availble with [], form of array.
 - if json is just array, $[0] for first, $[1,3] if want 1 and 3 index element.
->>>>> Another Image number query
+![Screenshot 2024-02-05 at 3 04 40 PM](https://github.com/MadSn7/My_Learning/assets/62552772/d5d45984-07a2-4d71-af1e-cef13d717d63)
+
 
 # SetUP Your OWN LAB(Linux)
 - Can set in either a local system or cloud.
@@ -362,7 +360,7 @@ most famous one usage.
 ## VirtualBox
 - Called hypervisor, to create vms, installed on bare metal.Expensive(Type 1 Hypervisor)
 - (Type 2 hypervisor) Oracle Virtual box etc installed on some system 
->>>> Image hypervisors
+![Screenshot 2024-02-06 at 4 08 27 PM](https://github.com/MadSn7/My_Learning/assets/62552772/6884de93-20c5-4875-9a71-03ddd95b492d)
 - Oracle virtualbox is free and works on all OS like windows, mac,linux,solaris etc.
 - Oracle VirtualBox require very small spaces and memory but recommended to have good enough specifications.
 - You can install virtual box according to you system ewither windows, mac etc.
