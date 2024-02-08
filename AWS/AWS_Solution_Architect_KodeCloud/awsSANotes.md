@@ -19,7 +19,7 @@ at a beginner level for various services.
 - My dummy SAA Exam result
     31/63 == 48%.(Recommended ~70%)(Fail Currently)(Took I think 2 hours lengthy paper)
 ### Why/What is SAA(Solution Architect Associtate) cert?
-- No coding experience
+- No coding experience required.
 - Understand basic services and manage 4 AreaS about it.
 - Broad exposure on various core services on aws.
 - Do anything around on AWS or career it can be the base for that.
@@ -33,7 +33,6 @@ at a beginner level for various services.
 - SAA-C03
 - `65 question exam`
 - `130 Minutes`
-- Check and confirm before giving one
 - Scenario based questions and not just simple ones like what vpcs are etc etc
 - Two Type question
     - MCQ(One correct, 3 incorrect)
@@ -48,8 +47,8 @@ at a beginner level for various services.
 |Resilient | 26% |
 |High-Performance | 24% |
 |Cost-optimize | 20% |
-
-### _Check if we can reattempt question review or not???_
+- Check and confirm above info before exam
+### _Check if we can reattempt question review or not??? got answer as yes_
 
 ## Services - Networking
 ### VPC(Virtual Private Cloud)
@@ -72,7 +71,7 @@ Ex
 
 1.Default : Whenever you create your aws account, aws configures a vpc for you , not one but for all regions you have access too.
 - Idea is to have a start to create resources without much issues.
-- /16 Ipv4 cidr block, and default vpc address 172.31.0.0 cidr block so 65,536 address availble(for all accounts)
+- /16 Ipv4 cidr block, and default vpc address 172.31.0.0 cidr block so 65,536 address available(for all accounts)
 - For every region's vpc, every default subnet will be there with /20 so: 
     1. AZ1 : 172.31.16.0/20
     2. AZ2: 172.31.32.0/20
@@ -92,7 +91,7 @@ Ex
 - Subnet must be within vpc's cidr range
 - Subnet block size between /16 to /28
 - Subnets cannot overlap with other subnets within vpc(Np common ip address)
-- A subnet allows for an oprional ipv6 CIDR and can be used only with IPV6 and remove ipv4.
+- A subnet allows for an optional ipv6 CIDR and can be used only with IPV6 and remove ipv4.
 - By default subnets within a vpc can communicate with each other
 - Auto assign ipv4/6 public address.
 <img width="1416" alt="Screenshot 2023-12-24 at 10 27 45 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/05cd4c1f-7a15-4f6d-9fc4-a1f07d8c3c53">
@@ -174,7 +173,7 @@ The default for this attribute is true.
 (Grey ones not necessary above)
 
 #### NACL(Network Access Control List)
-- They monitor traffic entering and leaving a subnet, and don't work withing subnet(Like RAW)
+- They monitor traffic entering and leaving a subnet, and don't work within subnet(Like RAW)
 - They are stateless, so need both inbound and outbound rules.
 - They can allow or deny traffic
 - Rule Fields have rule no*,type,protocol,port, ip, Allow/Deny.(lower the rule no, earlier it will be processed)
@@ -194,7 +193,7 @@ The default for this attribute is true.
 
 ### Elastic Load Balancer(ELB)
 - Issue : Application running on ec2 instance(ip is x), now we need to handle high traffic and ensure availability so have several instance running, in different azs, now they will have different ip(ips x,y,z etc)?How to handle request now from user?
-Client should have one ip address not all.So one leastic ip doesn't work.
+Client should have one ip address not all.So one elastic ip doesn't work.
 - Now we have a load balancer whose ip will be hit by user and it will load balance the request to several attached ec2's for the application.
 - So only ip to know is of elb, and we get abstraction for server as well.
 <img width="1406" alt="Screenshot 2023-12-26 at 9 26 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/3fbe3b5c-4424-49de-b6a4-109c7bd4be76">
@@ -329,19 +328,19 @@ Client should have one ip address not all.So one leastic ip doesn't work.
 ### Lambda@Edge and CloudFront Functions
 - Can run lightweight lambdas, cloudFronFunctions at edge locations to do small works and verifications etc.So less server work.
 <img width="942" alt="Screenshot 2023-12-27 at 8 15 34 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/684da6cc-0a70-4457-a132-b0b980e67d65">
+
 - Both CloudFront functions and Lambdas are different
     - CloudFront Functions : Runs when recieves a request  from viewer and also before sending the response back.
         - Ideal for leighweight operqations, like cache key normalizations, header maniulations, ur redirects/rewrites, authorizations like json
-    - Lambda@Edge : Both above as well as before forward request to rigin and also after reciecving a response from origin.
+    - Lambda@Edge : Both above as well as before forward request to origin and also after recieving a response from origin.
         - Ideal for little long running funciton, changing memory/cpu requiring functions, third party dependency, network-dependent functions, need body for http
 <img width="1350" alt="Screenshot 2023-12-27 at 8 18 36 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/467fb3ed-edb8-456f-b092-82b4be533448">
 
 ### Global Accelator
 - If request need to go to server it go through internet and it takes time, inefficient and take long path basically whatever available.
-- They also have edge locations, bit dierent from cloudfronEdge locatins
-_ when user hit the request, it goes to nearby global accelator edge locations and it then takes from there so fast, secure reliable than internet.
-- cloudfron is for cache objects, whereas global accelator if for routing quickly to aws network. 
-`aws global accfelator image`
+- They also have edge locations, bit different from cloudfrontEdge locatins
+- When user hit the request, it goes to nearby global accelator edge locations and it then takes from there so fast, secure reliable than internet.
+- cloudfront is for cache objects, whereas global accelator if for routing quickly to aws network. 
 <img width="939" alt="Screenshot 2023-12-27 at 8 22 49 AM" src="https://github.com/MadSn7/My_Learning/assets/62552772/88c02c9b-078e-43f6-8484-86d798bb1933">
 
 
