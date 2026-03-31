@@ -1,8 +1,8 @@
-//package org.example.A1_Introductory_Problems;
+package org.example.A1_Introductory_Problems;
 
 import java.util.Scanner;
 
-public class C4IncreasingArray {
+public class D4IncreasingArray {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
