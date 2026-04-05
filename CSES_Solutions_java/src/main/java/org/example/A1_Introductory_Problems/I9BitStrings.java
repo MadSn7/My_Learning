@@ -3,32 +3,21 @@
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class F6NumberSpiral {
+public class I9BitStrings {
     public static void main(String[] args) {
         MyScanner sc = new MyScanner();
         out = new PrintWriter(new BufferedOutputStream(System.out));
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            long x  = sc.nextInt();
-            long y = sc.nextInt();
 
-            long max = Math.max(x, y);
-            long min = Math.min(x, y);
-
-            if(max == y){
-                if(max % 2 == 0){
-                    out.println((max -1)*(max -1) + min);
-                }else{
-                    out.println(max*max - min +1);
-                }
-            }else{
-                if(max % 2 == 0){
-                    out.println(max*max - min +1);
-                }else{
-                    out.println((max -1)*(max -1) + min);
-                }
+        int N = sc.nextInt();
+        long ans = 1;
+        long MOD = 1_000_000_007;
+        for (int i = 0; i < N; i++) {
+            ans <<= 1;
+            if(ans>=MOD){
+                ans = ans - MOD;
             }
-        }
+        }//can do faster exponentiation
+        out.println(ans);
         out.close();
     }
 
@@ -67,7 +56,7 @@ public class F6NumberSpiral {
             return Double.parseDouble(next());
         }
 
-        String nextLine(){
+        String nextLine() {
             String str = "";
             try {
                 str = br.readLine();
@@ -78,5 +67,4 @@ public class F6NumberSpiral {
         }
 
     }
-
 }
